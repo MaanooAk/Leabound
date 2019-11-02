@@ -1,0 +1,83 @@
+
+all.png
+size: 64,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+logo-30
+  rotate: false
+  xy: 1, 1
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+solid-black
+  rotate: false
+  xy: 33, 24
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+solid-blue
+  rotate: false
+  xy: 39, 27
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+solid-green
+  rotate: false
+  xy: 36, 27
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+solid-grey
+  rotate: false
+  xy: 33, 30
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+solid-lblue
+  rotate: false
+  xy: 39, 30
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+solid-lgreen
+  rotate: false
+  xy: 36, 24
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+solid-lred
+  rotate: false
+  xy: 33, 27
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+solid-red
+  rotate: false
+  xy: 33, 21
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+solid-white
+  rotate: false
+  xy: 42, 30
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+solid-yellow
+  rotate: false
+  xy: 36, 30
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1

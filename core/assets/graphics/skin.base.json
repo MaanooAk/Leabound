@@ -1,0 +1,3 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: com/badlogic/gdx/utils/arial-15.fnt } }
+}
