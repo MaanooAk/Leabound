@@ -149,10 +149,6 @@ public abstract class Thing extends Mod {
 		return name;
 	}
 
-	public String getCurrentName() {
-		return getName();
-	}
-
 	public final Vector2 getLocation() {
 		return location;
 	}
