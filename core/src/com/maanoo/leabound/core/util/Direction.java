@@ -1,6 +1,5 @@
 package com.maanoo.leabound.core.util;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
 
@@ -30,12 +29,20 @@ public enum Direction {
 	 */
 	public static final Direction Default = Right; // must have ordinal of 0
 
+	/**
+	 * Returns a random direction.
+	 * @return one of the four directions
+	 */
+	public static Direction random() {
+		return Ra.random(values());
+	}
+
 	/** Unit d of x. */
 	public final int dx;
 	/** Unit d of y. */
 	public final int dy;
 	/** Unit d of x and y. */
-	public final Vector2 vector;
+	public final Location vector;
 
 	/**
 	 * The opposite {@link Align}
@@ -53,7 +60,7 @@ public enum Direction {
 		this.origin = origin;
 
 		degrees = ordinal() * 90;
-		vector = new Vector2(dx, dy);
+		vector = new Location(dx, dy);
 	}
 
 }

@@ -1,7 +1,8 @@
 package com.maanoo.leabound.core.thing;
 
-import com.badlogic.gdx.math.Vector2;
+
 import com.maanoo.leabound.core.util.Direction;
+import com.maanoo.leabound.core.util.Location;
 
 
 public abstract class StateThing extends Thing {
@@ -9,7 +10,7 @@ public abstract class StateThing extends Thing {
 	private State[] states;
 	private int state;
 
-	public StateThing(String name, Vector2 location, Direction rotation, State... states) {
+	public StateThing(String name, Location location, Direction rotation, State... states) {
 		super(name, location, rotation);
 		this.states = states;
 

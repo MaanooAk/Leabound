@@ -1,11 +1,11 @@
 package com.maanoo.leabound.core.thing;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Mod;
+import com.maanoo.leabound.core.util.Location;
 
 
 /**
@@ -16,7 +16,7 @@ import com.maanoo.leabound.core.util.Mod;
 public abstract class Thing extends Mod {
 
 	private String name;
-	private Vector2 location;
+	private Location location;
 	private Direction rotation;
 
 	private boolean active;
@@ -29,9 +29,9 @@ public abstract class Thing extends Mod {
 	 * @param location the starting location, nullable
 	 * @param rotation the starting rotation, nullable
 	 */
-	public Thing(String name, Vector2 location, Direction rotation) {
+	public Thing(String name, Location location, Direction rotation) {
 		this.name = name;
-		this.location = location == null ? new Vector2() : location;
+		this.location = location == null ? new Location() : location;
 		this.rotation = rotation == null ? Direction.Default : rotation;
 
 		active = false;
@@ -141,15 +141,15 @@ public abstract class Thing extends Mod {
 
 	public abstract boolean isBlocking();
 
-	public boolean activeFlow(Vector2 location) {
-		return getLocation().dst2(location) <= 1.05f; // 0.05 epsilon
+	public boolean activeFlow(Location location) {
+		return getLocation().dst(location) <= 1.05f; // 0.05 epsilon
 	}
 
 	public final String getName() {
 		return name;
 	}
 
-	public final Vector2 getLocation() {
+	public final Location getLocation() {
 		return location;
 	}
 
