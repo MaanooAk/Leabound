@@ -17,12 +17,12 @@ public final class WeightEntry<T> implements Weight {
 	/**
 	 * Constructs based on the give values
 	 *
-	 * @param entry  any object
 	 * @param weight the weight of the entry
+	 * @param entry  any object
 	 */
-	public WeightEntry(T entry, float weight) {
-		this.entry = entry;
+	public WeightEntry(float weight, T entry) {
 		this.weight = weight;
+		this.entry = entry;
 	}
 
 	/**
