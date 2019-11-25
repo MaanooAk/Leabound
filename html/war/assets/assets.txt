@@ -1,5 +1,10 @@
 d:assets:0:application/unknown
-i:badlogic.jpg:68465:image/jpeg
+d:graphics:0:application/unknown
+d:graphics/fonts:0:application/unknown
+t:graphics/fonts/12.fnt:11021:application/unknown
+i:graphics/all.png:10847:image/png
+t:graphics/all.atlas:5182:application/unknown
+t:graphics/skin.base.json:336:application/unknown
 t:com/badlogic/gdx/graphics/g3d/particles/particles.fragment.glsl:859:application/unknown
 t:com/badlogic/gdx/graphics/g3d/particles/particles.vertex.glsl:2996:application/unknown
 t:com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl:5350:application/unknown

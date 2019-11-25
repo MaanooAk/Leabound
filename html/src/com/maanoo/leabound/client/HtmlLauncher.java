@@ -11,6 +11,8 @@ public class HtmlLauncher extends GwtApplication {
 	public GwtApplicationConfiguration getConfig() {
 		final GwtApplicationConfiguration config = new GwtApplicationConfiguration(800, 600);
 
+//		config.antialiasing = true;
+
 		return config;
 	}
 

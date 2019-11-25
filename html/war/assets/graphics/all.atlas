@@ -20,7 +20,7 @@ and-gate
   index: -1
 and-gate_on
   rotate: false
-  xy: 87, 17
+  xy: 65, 29
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
@@ -43,49 +43,21 @@ chest
   index: -1
 chest_n
   rotate: false
-  xy: 153, 149
+  xy: 43, 29
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 dispenser_idle
   rotate: false
-  xy: 119, 105
+  xy: 43, 51
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 dispenser_used
   rotate: false
-  xy: 131, 83
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-fake-wall
-  rotate: false
   xy: 65, 51
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-fake-wall_1
-  rotate: false
-  xy: 43, 73
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-fake-wall_2
-  rotate: false
-  xy: 131, 171
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-fake-wall_3
-  rotate: false
-  xy: 153, 17
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
@@ -97,86 +69,51 @@ grid
   orig: 2, 2
   offset: 0, 0
   index: -1
-heal
-  rotate: false
-  xy: 65, 73
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
 key
   rotate: false
-  xy: 87, 39
+  xy: 163, 105
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 key-a
   rotate: false
-  xy: 153, 61
+  xy: 153, 149
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 key-b
   rotate: false
-  xy: 131, 17
+  xy: 153, 127
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 key-c
   rotate: false
-  xy: 153, 39
+  xy: 87, 39
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 latch-gate
   rotate: false
-  xy: 153, 127
+  xy: 131, 127
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 latch-gate_on
   rotate: false
-  xy: 65, 7
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-locked-chest_key
-  rotate: false
-  xy: 153, 83
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-locked-chest_key-a
-  rotate: false
-  xy: 131, 39
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-locked-chest_key-b
-  rotate: false
-  xy: 87, 83
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-locked-chest_key-c
-  rotate: false
   xy: 153, 171
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
-locked-chest_master-key
+locked-chest
   rotate: false
-  xy: 87, 61
+  xy: 109, 61
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
@@ -190,56 +127,28 @@ logo-30
   index: -1
 master-key
   rotate: false
-  xy: 43, 51
+  xy: 109, 83
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 not-gate
   rotate: false
-  xy: 75, 105
+  xy: 43, 73
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 not-gate_on
   rotate: false
-  xy: 109, 83
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-one-pass_idle
-  rotate: false
-  xy: 131, 127
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-one-pass_over
-  rotate: false
-  xy: 65, 29
+  xy: 141, 105
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 parts
   rotate: false
-  xy: 109, 61
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-parts_1
-  rotate: false
-  xy: 97, 105
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-parts_2
-  rotate: false
-  xy: 131, 149
+  xy: 65, 73
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
@@ -251,100 +160,107 @@ player-red
   orig: 40, 40
   offset: 0, 0
   index: -1
-player-red.jumb_1
-  rotate: false
-  xy: 1, 43
-  size: 40, 40
-  orig: 40, 40
-  offset: 0, 0
-  index: -1
-player-red.jumb_2
+player-red.jumb
   rotate: false
   xy: 131, 215
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
-  index: -1
-player-red.jumb_3
+  index: 1
+player-red.jumb
+  rotate: false
+  xy: 1, 43
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: 2
+player-red.jumb
   rotate: false
   xy: 1, 1
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
-  index: -1
+  index: 3
 pressure-plate_idle
   rotate: false
-  xy: 43, 7
+  xy: 97, 105
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 pressure-plate_idle_n
   rotate: false
-  xy: 217, 235
+  xy: 131, 171
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 pressure-plate_pressed
   rotate: false
-  xy: 109, 17
+  xy: 87, 61
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+pressure-plate_pressed_n
+  rotate: false
+  xy: 131, 149
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 solid-black
   rotate: false
-  xy: 176, 232
+  xy: 47, 4
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-blue
   rotate: false
-  xy: 250, 254
+  xy: 176, 232
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-dgrey
   rotate: false
-  xy: 87, 14
+  xy: 109, 58
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-green
   rotate: false
-  xy: 75, 99
+  xy: 47, 1
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-grey
   rotate: false
-  xy: 47, 4
+  xy: 239, 243
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-lblack
   rotate: false
-  xy: 239, 243
+  xy: 153, 102
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-lblue
   rotate: false
-  xy: 175, 80
+  xy: 131, 80
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-lgreen
   rotate: false
-  xy: 90, 14
+  xy: 78, 102
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
@@ -358,68 +274,75 @@ solid-lpurple
   index: -1
 solid-lred
   rotate: false
-  xy: 75, 102
+  xy: 75, 99
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-purple
   rotate: false
-  xy: 47, 1
+  xy: 87, 36
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-red
   rotate: false
-  xy: 87, 11
+  xy: 173, 229
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-white
   rotate: false
-  xy: 78, 102
+  xy: 75, 102
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 solid-yellow
   rotate: false
-  xy: 173, 229
+  xy: 250, 254
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 switch_active
   rotate: false
-  xy: 109, 39
+  xy: 65, 7
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+switch_active_n
+  rotate: false
+  xy: 75, 105
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 switch_idle
   rotate: false
-  xy: 175, 83
+  xy: 131, 83
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+switch_idle_n
+  rotate: false
+  xy: 217, 235
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 switch_pressed
   rotate: false
-  xy: 43, 29
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-upgrade-life
-  rotate: false
   xy: 195, 235
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
-wall
+switch_pressed_n
   rotate: false
   xy: 153, 193
   size: 20, 20
@@ -428,21 +351,21 @@ wall
   index: -1
 wire
   rotate: false
-  xy: 131, 61
+  xy: 87, 83
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 wire_off
   rotate: false
-  xy: 141, 105
+  xy: 119, 105
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
   index: -1
 wire_on
   rotate: false
-  xy: 163, 105
+  xy: 43, 7
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
