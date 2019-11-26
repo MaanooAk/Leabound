@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class ViewShadow extends Image {
 
 	// TODO make graphic
+	// TODO move to ViewInWorld
 
 	private final int gsize;
 	private final int cx;

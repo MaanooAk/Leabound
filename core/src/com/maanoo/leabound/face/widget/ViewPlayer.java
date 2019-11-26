@@ -1,8 +1,6 @@
 package com.maanoo.leabound.face.widget;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -12,11 +10,7 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.face.drawable.AnimationDrawable;
 
 
-public class ViewPlayer extends Group {
-
-	private final int gsize;
-	private final int cx;
-	private final int cy;
+public class ViewPlayer extends ViewInWorld {
 
 	private final Player player;
 
@@ -25,7 +19,7 @@ public class ViewPlayer extends Group {
 	private Image image;
 
 	public ViewPlayer(Skin skin, int gsize, Player player) {
-		this.gsize = gsize;
+		super(gsize);
 		this.player = player;
 
 		final String drawable = player.getDrawable();
@@ -42,9 +36,6 @@ public class ViewPlayer extends Group {
 
 		setSize(gsize, gsize);
 		addActor(image);
-
-		cx = Gdx.graphics.getWidth() / 2;
-		cy = Gdx.graphics.getHeight() / 2;
 	}
 
 	// === animations ===
@@ -96,4 +87,5 @@ public class ViewPlayer extends Group {
 	public void clearActions() {
 		throw new RuntimeException();
 	}
+
 }
