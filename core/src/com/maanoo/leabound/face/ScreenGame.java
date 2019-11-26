@@ -34,7 +34,7 @@ import com.maanoo.leabound.face.widget.ViewThing;
 import com.maanoo.leabound.face.widget.ViewsThing;
 
 
-public class ScreenMenu extends StageScreen {
+public class ScreenGame extends StageScreen {
 
 	private Group group;
 	private Group groupThings;
@@ -57,7 +57,7 @@ public class ScreenMenu extends StageScreen {
 
 	private Label version;
 
-	public ScreenMenu(LeaboundGame game) {
+	public ScreenGame(LeaboundGame game) {
 		super(game);
 	}
 
@@ -436,7 +436,7 @@ public class ScreenMenu extends StageScreen {
 						Actions.delay(1)
 
 				));
-				fadeScreen(new ScreenMenu(game), 1);
+				fadeScreen(new ScreenGame(game), 1);
 
 				player.messages.add("You are [warning]dead[] ...");
 
