@@ -9,6 +9,7 @@ import com.maanoo.leabound.core.util.Location;
 
 public class Player {
 
+	private final String drawable;
 	public final Location location;
 
 	public final ItemBundle bag;
@@ -24,6 +25,7 @@ public class Player {
 	public final Array<String> messages;
 
 	public Player(int startMaxlife) {
+		drawable = "player-red"; // TODO extend
 		location = new Location();
 
 		bag = new ItemBundle();
@@ -37,6 +39,10 @@ public class Player {
 		messages = new Array<String>();
 
 		bag.add(Item.Parts, 5);
+	}
+
+	public String getDrawable() {
+		return drawable;
 	}
 
 	public void pickup(Item item) {

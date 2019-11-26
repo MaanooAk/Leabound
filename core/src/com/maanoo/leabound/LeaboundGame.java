@@ -17,14 +17,14 @@ public class LeaboundGame extends Game {
 
 	public LeaboundSkin skin;
 
-	public boolean noise = true;
+	public boolean debug = true;
 
 	@Override
 	public void create() {
 
 		skin = new LeaboundSkin("base");
 
-		setScreen(new ScreenMenu(this));
+		setScreen(new ScreenMenu(this).fadeIn());
 
 	}
 

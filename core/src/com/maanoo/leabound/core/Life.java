@@ -29,6 +29,7 @@ public final class Life extends Mod {
 	}
 
 	// === change ===
+
 	/**
 	 * Add to life and the max life.
 	 *
