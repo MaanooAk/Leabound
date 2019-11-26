@@ -4,14 +4,19 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.maanoo.leabound.LeaboundGame;
 
+
 public class DesktopLauncher {
+
 	public static void main(String[] arg) {
 		final LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = "Leabound";
 
 		config.width = 800;
 		config.height = 600;
 		config.resizable = false;
+//		config.samples = 4;
 
 		new LwjglApplication(new LeaboundGame(), config);
 	}
+
 }
