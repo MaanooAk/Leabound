@@ -26,6 +26,42 @@ public class Item {
 		return item;
 	}
 
+	// === enum ===
+
+	// global
+
+	public static final Item Parts = new Item("parts", Type.Global);
+	public static final Item MasterKey = new Item("master-key", Type.Global);
+
+	// local
+
+	public static final Item Key = new Item("key", Type.Local);
+	public static final Item KeyA = new Item("key-a", Type.Local);
+	public static final Item KeyB = new Item("key-b", Type.Local);
+	public static final Item KeyC = new Item("key-c", Type.Local);
+
+	// instant
+
+	public static final Item Heal = new Item("heal", Type.Instant) {
+
+		@Override
+		public boolean activate(Board board, Player player) {
+			player.life.heal(.2f);
+			return true;
+		}
+
+	};
+
+	public static final Item UpgradeLife = new Item("upgrade-life", Type.Instant) {
+
+		@Override
+		public boolean activate(Board board, Player player) {
+			player.addLife(1);
+			return true;
+		}
+
+	};
+
 	// === class ===
 
 	private final String name;
