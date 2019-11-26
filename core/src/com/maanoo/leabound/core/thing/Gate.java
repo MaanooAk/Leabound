@@ -13,13 +13,11 @@ public abstract class Gate extends Thing {
 
 	private final transient Location outputLocation;
 
-	public Gate(String name, Location location, Direction rotation, boolean startActive,
-			String drawable) {
-		this(name, location, rotation, startActive, drawable, drawable + "_on");
+	public Gate(String name, Location location, Direction rotation, String drawable) {
+		this(name, location, rotation, drawable, drawable + "_on");
 	}
 
-	private Gate(String name, Location location, Direction rotation, boolean startActive,
-			String drawableOff, String drawableOn) {
+	private Gate(String name, Location location, Direction rotation, String drawableOff, String drawableOn) {
 		super(name, location, rotation);
 		this.drawableOff = drawableOff;
 		this.drawableOn = drawableOn;
@@ -28,7 +26,6 @@ public abstract class Gate extends Thing {
 
 		internal = new Wire(location);
 
-		if (startActive) activate();
 	}
 
 	@Override
@@ -73,10 +70,6 @@ public abstract class Gate extends Thing {
 	@Override
 	public final String getDrawable() {
 		return isActive() ? drawableOn : drawableOff;
-	}
-
-	public final Wire getInternal() {
-		return internal;
 	}
 
 	@Override
