@@ -4,7 +4,7 @@ import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class LatchGate extends Gate {
+public final class LatchGate extends Gate {
 
 	public LatchGate(Location location, Direction rotation) {
 		super("Latch Gate", location, rotation, "latch-gate");

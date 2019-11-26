@@ -5,7 +5,7 @@ import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class Dispenser extends StateThing {
+public final class Dispenser extends StateThing {
 
 	private static final SimpleState Idle = new SimpleState("dispenser_idle", true);
 	private static final SimpleState Used = new SimpleState("dispenser_used", true);

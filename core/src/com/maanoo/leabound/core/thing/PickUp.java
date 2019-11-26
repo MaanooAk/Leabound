@@ -5,7 +5,7 @@ import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class PickUp extends StaticThing {
+public final class PickUp extends StaticThing {
 
 	private final Item item;
 	private final int origin;

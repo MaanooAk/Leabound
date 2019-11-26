@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Array;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class Wire extends StateThing {
+public final class Wire extends StateThing {
 
 	// TODO simplify
 

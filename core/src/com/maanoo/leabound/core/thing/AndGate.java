@@ -4,7 +4,7 @@ import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class AndGate extends Gate {
+public final class AndGate extends Gate {
 
 	public AndGate(Location location, Direction rotation) {
 		super("And Gate", location, rotation, "and-gate");

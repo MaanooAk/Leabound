@@ -7,7 +7,7 @@ import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class FakeWall extends Thing {
+public final class FakeWall extends Thing {
 
 	// TODO crate abstract of health kind things
 

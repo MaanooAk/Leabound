@@ -4,7 +4,7 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class Switch extends StateThing {
+public final class Switch extends StateThing {
 
 	// TODO add directed switch
 
@@ -24,8 +24,7 @@ public class Switch extends StateThing {
 			activate();
 		}
 
-		nextState();
-		return true;
+		return nextState();
 	}
 
 }

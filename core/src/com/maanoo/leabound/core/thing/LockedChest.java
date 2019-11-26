@@ -6,7 +6,7 @@ import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class LockedChest extends StaticThing {
+public final class LockedChest extends StaticThing {
 
 	private final Item key;
 

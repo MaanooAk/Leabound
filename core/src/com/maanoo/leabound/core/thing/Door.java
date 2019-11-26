@@ -5,7 +5,7 @@ import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class Door extends StaticThing {
+public final class Door extends StaticThing {
 
 	// TODO create graphic
 
