@@ -18,13 +18,14 @@ public abstract class StateThing extends Thing {
 	}
 
 	protected final boolean nextState() {
-
-		if (states.length < 2) return false;
+		assert states.length > 1;
 
 		state = (state + 1) % states.length;
 		mod();
 		return true;
 	}
+
+	// === access ===
 
 	@Override
 	public final String getDrawable() {
@@ -38,6 +39,10 @@ public abstract class StateThing extends Thing {
 
 	public State getState() {
 		return states[state];
+	}
+
+	public int getStateCount() {
+		return states.length;
 	}
 
 	// === states ===
