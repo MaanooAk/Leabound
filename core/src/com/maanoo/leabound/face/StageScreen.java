@@ -180,7 +180,7 @@ public abstract class StageScreen implements Screen {
 				})));
 	}
 
-	public void fadeIn() {
+	public StageScreen fadeIn() {
 
 		moveToFront(fading);
 
@@ -189,6 +189,7 @@ public abstract class StageScreen implements Screen {
 				Actions.fadeOut(0.3f, Interpolation.sineIn) //
 		));
 
+		return this;
 	}
 
 }
