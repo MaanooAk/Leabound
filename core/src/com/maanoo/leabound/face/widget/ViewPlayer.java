@@ -12,15 +12,12 @@ import com.maanoo.leabound.face.drawable.AnimationDrawable;
 
 public class ViewPlayer extends ViewInWorld {
 
-	private final Player player;
-
 	private final AnimationDrawable anim;
 
 	private Image image;
 
 	public ViewPlayer(Skin skin, int gsize, Player player) {
 		super(gsize);
-		this.player = player;
 
 		final String drawable = player.getDrawable();
 

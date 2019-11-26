@@ -51,8 +51,10 @@ public class ViewMessage extends Group {
 
 		if (text.charAt(0) == '!') {
 			text = text.substring(1);
-
 			durationMax = 10;
+		} else if (text.charAt(0) == '*') {
+			text = text.substring(1);
+			durationMax = 100;
 		}
 
 		label.setText(text);
