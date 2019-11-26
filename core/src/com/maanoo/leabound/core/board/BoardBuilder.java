@@ -5,6 +5,7 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.AndGate;
 import com.maanoo.leabound.core.thing.Dispenser;
+import com.maanoo.leabound.core.thing.Display;
 import com.maanoo.leabound.core.thing.Door;
 import com.maanoo.leabound.core.thing.LatchGate;
 import com.maanoo.leabound.core.thing.LockedChest;
@@ -17,8 +18,8 @@ import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.thing.Wall;
 import com.maanoo.leabound.core.thing.Wire;
 import com.maanoo.leabound.core.util.Direction;
-import com.maanoo.leabound.core.util.Ra;
 import com.maanoo.leabound.core.util.Location;
+import com.maanoo.leabound.core.util.Ra;
 
 
 public class BoardBuilder {
@@ -31,23 +32,35 @@ public class BoardBuilder {
 	private String name;
 	private String board;
 	private String[] things;
+	private int w;
+	private int h;
 
 	public BoardBuilder(String name, String board, String... things) {
+		this(name, BoardWidth, BoardHeight, board, things);
+	}
+
+	public BoardBuilder(String name, int w, int h, String board, String... things) {
 		this.name = name;
+		this.w = w;
+		this.h = h;
 		this.board = board;
 		this.things = things;
 	}
 
 	public Board build(Player player) {
+		return build(player, new Bound(w, h, player));
+	}
 
-		final Board b = new Board(name, new Bound(BoardWidth, BoardHeight, player));
+	public Board build(Player player, Bound bound) {
 
-		Location location = new Location(-8, 6);
+		final Board b = new Board(name, bound);
+
+		Location location = new Location(-w / 2, h / 2 - 1);
 
 		for (final char c : board.toCharArray()) {
 
 			if (c == '\n') {
-				location.set(-8, location.y - 1);
+				location.set(-w / 2, location.y - 1);
 				continue;
 			}
 
@@ -145,6 +158,11 @@ public class BoardBuilder {
 			final Direction rotation = parseRotation(parts[1]);
 
 			return new AndGate(location, rotation);
+
+		} else if (parts[0].equals("display")) {
+			final String param = parts[1].replace("_", " ");
+
+			return new Display(location, param);
 
 		} else {
 			throw new RuntimeException("Unknown thing: " + parts[0]);
