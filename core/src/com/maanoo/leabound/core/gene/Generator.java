@@ -84,7 +84,7 @@ public class Generator {
 					@Override
 					public Thing generate(Board board, Location location) {
 
-						return new LockedChest(location, Item.MasterKey, board, new PickUp(null,
+						return new LockedChest(location, Item.MasterKey, new PickUp(null,
 								Ra.random(items), Align.center));
 					}
 

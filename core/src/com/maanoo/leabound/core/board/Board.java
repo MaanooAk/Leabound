@@ -2,10 +2,10 @@ package com.maanoo.leabound.core.board;
 
 import java.util.Iterator;
 
+import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.VectorMap;
-
 
 public class Board implements Iterable<Thing> {
 
@@ -13,7 +13,7 @@ public class Board implements Iterable<Thing> {
 
 	private final Bound bound;
 
-	private final VectorMap<Thing> things;
+	private VectorMap<Thing> things;
 
 	public Board(String name, Bound bound) {
 		this.name = name;
@@ -21,6 +21,23 @@ public class Board implements Iterable<Thing> {
 
 		things = new VectorMap<Thing>();
 	}
+
+	public void transform(BoardTransfom tra) {
+
+		final VectorMap<Thing> things = new VectorMap<Thing>();
+
+		for (final Thing i : this) {
+			i.getLocation().x = -i.getLocation().x - 1;
+			i.reset(tra);
+
+			things.put(i.getLocation(), i);
+		}
+
+		this.things = things;
+		onCreate();
+	}
+
+	// === access ===
 
 	public Bound getBound() {
 		return bound;
@@ -50,22 +67,23 @@ public class Board implements Iterable<Thing> {
 	// === events ===
 
 	public void onCreate() {
+		final Player player = null;
 
 		for (final Thing i : things.valuesInstace()) {
 
-			updateOnActvateChange(i);
+			updateOnActvateChange(i, player);
 		}
 
 	}
 
-	public void updateOnActvateChange(Thing source) {
+	public void updateOnActvateChange(Thing source, Player player) {
 
 		for (final Thing i : things.valuesInstace()) { // TODO iter ?
 			if (i.isDestroyed()) continue;
 
-			final boolean change = i.onThingActiveChange(source);
+			final boolean change = i.onThingActiveChange(source, player);
 			if (change) {
-				updateOnActvateChange(i);
+				updateOnActvateChange(i, player);
 			}
 		}
 

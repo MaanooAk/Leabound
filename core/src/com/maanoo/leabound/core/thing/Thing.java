@@ -3,6 +3,7 @@ package com.maanoo.leabound.core.thing;
 import com.badlogic.gdx.utils.Align;
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
+import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.Mod;
@@ -15,8 +16,9 @@ import com.maanoo.leabound.core.util.Mod;
 public abstract class Thing extends Mod {
 
 	private final String name;
-	private final Location location;
-	private final Direction rotation;
+
+	private Location location;
+	private Direction rotation;
 
 	private boolean active;
 	private boolean destroyed;
@@ -31,13 +33,15 @@ public abstract class Thing extends Mod {
 	public Thing(String name, Location location, Direction rotation) {
 		this.name = name;
 		this.location = location == null ? new Location() : location;
-		this.rotation = rotation == null ? Direction.Default : rotation;
+		this.rotation = rotation;
 
 		active = false;
 		destroyed = false;
 	}
 
-	public void reset() {
+	public void reset(BoardTransfom tra) {
+
+		rotation = tra.rotation(rotation);
 
 		active = false;
 		destroyed = false;
@@ -161,7 +165,7 @@ public abstract class Thing extends Mod {
 	}
 
 	public final Direction getRotation() {
-		return rotation;
+		return rotation == null ? Direction.Default : rotation;
 	}
 
 	public int getOrigin() {

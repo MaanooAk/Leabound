@@ -42,7 +42,7 @@ public final class Ra {
 		return ra.nextBoolean();
 	}
 
-	public static <T> T random(T[] array) {
+	public static <T> T random(T... array) {
 		return array[next(array.length)];
 	}
 

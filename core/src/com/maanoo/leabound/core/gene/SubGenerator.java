@@ -181,7 +181,7 @@ public abstract class SubGenerator {
 			}
 			board.addThing(new AndGate(p3, rot));
 			board.addThing(new Dispenser(p4, rot, pickup1));
-			board.addThing(new LockedChest(p5, pickup1.getItem(), board, pickup2));
+			board.addThing(new LockedChest(p5, pickup1.getItem(), pickup2));
 
 			wire(board, p1, p3);
 			wire(board, p2, p3);
@@ -232,8 +232,8 @@ public abstract class SubGenerator {
 			final PickUp pickup3 = new PickUp(null, Item.Parts, Align.center);
 
 			board.addThing(pickup1);
-			board.addThing(new LockedChest(p2, pickup1.getItem(), board, pickup2));
-			board.addThing(new LockedChest(p3, pickup2.getItem(), board, pickup3));
+			board.addThing(new LockedChest(p2, pickup1.getItem(), pickup2));
+			board.addThing(new LockedChest(p3, pickup2.getItem(), pickup3));
 
 			//
 

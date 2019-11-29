@@ -1,5 +1,6 @@
 package com.maanoo.leabound.core.thing;
 
+import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
@@ -12,8 +13,8 @@ public final class NotGate extends Gate {
 	}
 
 	@Override
-	public void reset() {
-		super.reset();
+	public void reset(BoardTransfom tra) {
+		super.reset(tra);
 
 		activate();
 	}

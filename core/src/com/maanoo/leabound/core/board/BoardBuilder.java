@@ -135,7 +135,7 @@ public class BoardBuilder {
 			final Item item = parseItem(parts[2]);
 
 			return new LockedChest(location, unlock,
-					board, new PickUp(null, item, Align.center));
+					new PickUp(null, item, Align.center));
 
 		} else if (parts[0].equals("door")) {
 			final Item unlock = parseItem(parts[1]);

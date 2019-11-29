@@ -18,12 +18,14 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.Statistics;
 import com.maanoo.leabound.core.World;
 import com.maanoo.leabound.core.board.Board;
+import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Boards;
 import com.maanoo.leabound.core.board.Bound;
 import com.maanoo.leabound.core.gene.Generator;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.util.Location;
+import com.maanoo.leabound.core.util.Ra;
 import com.maanoo.leabound.face.widget.GroupParti;
 import com.maanoo.leabound.face.widget.ViewBag;
 import com.maanoo.leabound.face.widget.ViewBound;
@@ -290,7 +292,7 @@ public class ScreenGame extends StageScreen {
 			final Thing thing = board.getThing(newlocation);
 			if (thing != null && thing.isBlocking()) {
 				if (thing.onPlayerBounce(player)) {
-					board.updateOnActvateChange(thing);
+					board.updateOnActvateChange(thing, player);
 				}
 
 				vPlayer.bounceThing(dx, dy);
@@ -315,7 +317,7 @@ public class ScreenGame extends StageScreen {
 			if (board.hasThing(player.location)) {
 				if (board.getThing(player.location).onPlayerLeave(player)) {
 					change = true;
-					board.updateOnActvateChange(board.getThing(player.location));
+					board.updateOnActvateChange(board.getThing(player.location), player);
 				}
 			}
 
@@ -325,7 +327,7 @@ public class ScreenGame extends StageScreen {
 			if (board.hasThing(player.location)) {
 				if (board.getThing(player.location).onPlayerEnter(player)) {
 					change = true;
-					board.updateOnActvateChange(board.getThing(player.location));
+					board.updateOnActvateChange(board.getThing(player.location), player);
 				}
 			}
 
@@ -363,12 +365,16 @@ public class ScreenGame extends StageScreen {
 		player.location.set(0, 0);
 
 		player.boardIndex += 1;
+
 		if (Boards.fixed.containsKey(player.boardIndex)) {
 
 			world.setBoard(Boards.fixed.get(player.boardIndex).build(player));
 		} else {
 			world.setBoard(new Generator().generate(player));
 		}
+
+		world.getBoard().transform(Ra.random(
+				BoardTransfom.Identity, BoardTransfom.FlipX, BoardTransfom.FlipY, BoardTransfom.FlipXY));
 
 		final Board board = world.getBoard();
 
@@ -442,7 +448,7 @@ public class ScreenGame extends StageScreen {
 
 			if (!board.getBound().contains(i.getLocation())) {
 				if (i.onOutsideBound()) {
-					board.updateOnActvateChange(i);
+					board.updateOnActvateChange(i, player);
 
 					board.removeThing(i.getLocation());
 				}
