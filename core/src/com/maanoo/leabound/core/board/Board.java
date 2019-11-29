@@ -26,8 +26,13 @@ public class Board implements Iterable<Thing> {
 
 		final VectorMap<Thing> things = new VectorMap<Thing>();
 
+		final int x = -bound.getWidth() / 2;
+		final int y = -bound.getHeight() / 2;
+		final int w = bound.getWidth();
+		final int h = bound.getHeight();
+
 		for (final Thing i : this) {
-			i.getLocation().x = -i.getLocation().x - 1;
+			tra.location(i.getLocation(), x, y, w, h);
 			i.reset(tra);
 
 			things.put(i.getLocation(), i);

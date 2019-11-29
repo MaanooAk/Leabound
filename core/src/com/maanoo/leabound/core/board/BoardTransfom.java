@@ -2,10 +2,18 @@ package com.maanoo.leabound.core.board;
 
 import com.badlogic.gdx.utils.Align;
 import com.maanoo.leabound.core.util.Direction;
+import com.maanoo.leabound.core.util.Location;
 
 public class BoardTransfom {
 
-	private BoardTransfom() {
+	private String name;
+
+	private BoardTransfom(String name) {
+		this.name = name;
+	}
+
+	public void location(Location location, int x, int y, int w, int h) {
+		// no op
 	}
 
 	public Direction rotation(Direction direction) {
@@ -16,11 +24,21 @@ public class BoardTransfom {
 		return align;
 	}
 
+	@Override
+	public final String toString() {
+		return name;
+	}
+
 	// === instances ===
 
-	public static final BoardTransfom Identity = new BoardTransfom();
+	public static final BoardTransfom Identity = new BoardTransfom("Identity");
 
-	public static final BoardTransfom FlipX = new BoardTransfom() {
+	public static final BoardTransfom FlipX = new BoardTransfom("FlipX") {
+
+		@Override
+		public void location(Location location, int x, int y, int w, int h) {
+			location.x = -location.x - 1;
+		}
 
 		@Override
 		public Direction rotation(Direction direction) {
@@ -38,7 +56,12 @@ public class BoardTransfom {
 
 	};
 
-	public static final BoardTransfom FlipY = new BoardTransfom() {
+	public static final BoardTransfom FlipY = new BoardTransfom("FlipY") {
+
+		@Override
+		public void location(Location location, int x, int y, int w, int h) {
+			location.y = -location.y - 1;
+		}
 
 		@Override
 		public Direction rotation(Direction direction) {
@@ -56,7 +79,13 @@ public class BoardTransfom {
 
 	};
 
-	public static final BoardTransfom FlipXY = new BoardTransfom() {
+	public static final BoardTransfom FlipXY = new BoardTransfom("FlipXY") {
+
+		@Override
+		public void location(Location location, int x, int y, int w, int h) {
+			FlipX.location(location, x, y, w, h);
+			FlipY.location(location, x, y, w, h);
+		}
 
 		@Override
 		public Direction rotation(Direction direction) {
