@@ -7,8 +7,8 @@ import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.AndGate;
 import com.maanoo.leabound.core.thing.Dispenser;
+import com.maanoo.leabound.core.thing.FakeWall;
 import com.maanoo.leabound.core.thing.LockedChest;
-import com.maanoo.leabound.core.thing.NotGate;
 import com.maanoo.leabound.core.thing.OnePassDoor;
 import com.maanoo.leabound.core.thing.PickUp;
 import com.maanoo.leabound.core.thing.PressurePlate;
@@ -27,7 +27,15 @@ public abstract class SubGenerator {
 	private SubGenerator() {
 	}
 
-	public abstract boolean can(Board board, BoardArea area, int emptyAreas);
+	public final boolean can(Board board, BoardArea area, int emptyAreas) {
+		return can(board, area, emptyAreas, //
+				area.getLocations() < BoardArea.LocationsSM,
+				area.getLocations() >= BoardArea.LocationsSM && area.getLocations() <= BoardArea.LocationsMB,
+				area.getLocations() > BoardArea.LocationsMB);
+	}
+
+	public abstract boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium,
+			boolean big);
 
 	public abstract Object generate(Board board, BoardArea area, float level);
 
@@ -90,14 +98,30 @@ public abstract class SubGenerator {
 			return null;
 		}
 
-		public abstract void generate(Array<Thing> things, BoardArea area, float level);
+		protected abstract void generate(Array<Thing> things, BoardArea area, float level);
 
-		public void generateDebug(Array<Thing> things, BoardArea area) {
+		protected void generateDebug(Array<Thing> things, BoardArea area) {
 
 			things.add(new Wire(area.get(Align.topRight)));
 			things.add(new Wire(area.get(Align.topLeft)));
 			things.add(new Wire(area.get(Align.bottomRight)));
 			things.add(new Wire(area.get(Align.bottomLeft)));
+		}
+
+		protected void makeFirstWallFake(Array<Thing> things) {
+
+			Thing wall = null;
+
+			for (int i = 0; i < things.size; i++) {
+				if (things.get(i) instanceof Wall) {
+					wall = things.removeIndex(i);
+					break;
+				}
+			}
+
+			if (wall == null) return;
+
+			things.add(new FakeWall(wall.getLocation()));
 		}
 
 	}
@@ -113,8 +137,8 @@ public abstract class SubGenerator {
 		}
 
 		@Override
-		public boolean can(Board board, BoardArea area, int emptyAreas) {
-			return area.getLocations() < BoardArea.LocationsSM;
+		public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
+			return small;
 		}
 
 		@Override
@@ -141,8 +165,8 @@ public abstract class SubGenerator {
 	public static class LogicProblem1 extends SubGenerator {
 
 		@Override
-		public boolean can(Board board, BoardArea area, int emptyAreas) {
-			return area.getLocations() > BoardArea.LocationsSM && area.getLocations() < BoardArea.LocationsMB;
+		public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
+			return medium;
 		}
 
 		@Override
@@ -232,8 +256,8 @@ public abstract class SubGenerator {
 	public static class LogicProblem2 extends LogicProblem1 {
 
 		@Override
-		public boolean can(Board board, BoardArea area, int emptyAreas) {
-			return area.getLocations() > BoardArea.LocationsMB;
+		public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
+			return big;
 		}
 
 		@Override
@@ -273,8 +297,8 @@ public abstract class SubGenerator {
 	public static class OnePassProblem extends SubGenerator {
 
 		@Override
-		public boolean can(Board board, BoardArea area, int emptyAreas) {
-			return area.getLocations() > BoardArea.LocationsSM;
+		public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
+			return medium || big;
 		}
 
 		@Override
@@ -337,74 +361,6 @@ public abstract class SubGenerator {
 			}
 
 			return null;
-		}
-
-	}
-
-	public static class LogicProblem3 extends SubGeneratorTransform {
-
-		@Override
-		public boolean can(Board board, BoardArea area, int emptyAreas) {
-			return area.getLocations() > BoardArea.LocationsSM
-					&& area.getLocations() < BoardArea.LocationsMB;
-		}
-
-		@Override
-		public void generate(Array<Thing> things, BoardArea area, float level) {
-
-			final Location p = area.get(Align.center);
-
-//			things.add(new Wire(area.get(Align.topRight)));
-//			things.add(new Wire(area.get(Align.topLeft)));
-//			things.add(new Wire(area.get(Align.bottomRight)));
-//			things.add(new Wire(area.get(Align.bottomLeft)));
-
-			final Direction dispencerRotation = Ra.random(Direction.Left, Direction.Left, Direction.Up, Direction.Down);
-
-			final int perm = Ra.next(3);
-
-			p.add(-4, 0);
-			things.add(new Dispenser(p.cpy(), dispencerRotation, Item.Parts));
-			p.add(1, 0);
-			things.add(new Wire(p.cpy()));
-			p.add(1, 0);
-			things.add(new AndGate(p.cpy(), Direction.Left));
-			things.add(new Wire(p.cpy(0, 1)));
-			things.add(new Wire(p.cpy(0, -1)));
-			p.add(1, 0);
-			if (perm == 0) {
-				things.add(new Wire(p.cpy(0, 1)));
-				things.add(new NotGate(p.cpy(0, -1), Direction.Left));
-			} else if (perm == 1) {
-				things.add(new NotGate(p.cpy(0, 1), Direction.Left));
-				things.add(new Wire(p.cpy(0, -1)));
-			} else {
-				things.add(new Wire(p.cpy(0, 1)));
-				things.add(new Wire(p.cpy(0, -1)));
-			}
-			p.add(1, 0);
-			things.add(new Wire(p.cpy(0, 1)));
-			things.add(new Wire(p.cpy(0, -1)));
-			p.add(1, 0);
-			things.add(new AndGate(p.cpy(0, 1), Direction.Left));
-			things.add(new AndGate(p.cpy(0, -1), Direction.Left));
-			things.add(new Wire(p.cpy(0, 2)));
-			things.add(new Wire(p.cpy(0, 0)));
-			things.add(new Wire(p.cpy(0, -2)));
-			p.add(1, 0);
-			things.add(new Wire(p.cpy(0, 2)));
-			if (perm == 2) {
-				things.add(new NotGate(p.cpy(0, 0), Direction.Left));
-			} else {
-				things.add(new Wire(p.cpy(0, 0)));
-			}
-			things.add(new Wire(p.cpy(0, -2)));
-			p.add(1, 0);
-			things.add(new Switch(p.cpy(0, 2)));
-			things.add(new Wire(p.cpy(0, 0)));
-			things.add(new Switch(p.cpy(1, 0)));
-			things.add(new Switch(p.cpy(0, -2)));
-
 		}
 
 	}

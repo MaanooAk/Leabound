@@ -7,6 +7,7 @@ import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Bound;
 import com.maanoo.leabound.core.gene.subs.SimpleMaze;
+import com.maanoo.leabound.core.gene.subs.TripleAnd;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.FakeWall;
 import com.maanoo.leabound.core.thing.LockedChest;
@@ -41,7 +42,7 @@ public class Generator {
 
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem1()));
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.OnePassProblem()));
-		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem3()));
+		subs.add(new WeightEntry<SubGenerator>(100, new TripleAnd()));
 
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem2()));
 		subs.add(new WeightEntry<SubGenerator>(100, new SimpleMaze()));
