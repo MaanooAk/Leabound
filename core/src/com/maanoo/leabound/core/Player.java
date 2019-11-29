@@ -6,7 +6,6 @@ import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.item.ItemBundle;
 import com.maanoo.leabound.core.util.Location;
 
-
 public class Player {
 
 	private final String drawable;
@@ -52,6 +51,7 @@ public class Player {
 			bag.add(item, 1);
 		}
 
+		if (item == Item.Parts) Statistics.Run.parts += 1;
 	}
 
 	public void leapStart() {
