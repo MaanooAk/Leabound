@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.maanoo.leabound.core.Player;
 
-
 public class ViewMessage extends Group {
 
 	// TODO clean up
@@ -16,6 +15,7 @@ public class ViewMessage extends Group {
 	private final Player player;
 
 	private final Image back;
+	private final Image fore;
 	private final Label label;
 
 	public ViewMessage(Skin skin, Player player) {
@@ -25,11 +25,14 @@ public class ViewMessage extends Group {
 
 		back = new Image(skin, "solid-black");
 		back.getColor().a = 0.7f;
+		fore = new Image(skin, "solid-white");
+		fore.getColor().a = 0f;
 
 		label = new Label("", skin);
 
 		addActor(back);
 		addActor(label);
+		addActor(fore);
 	}
 
 	private float posX;
@@ -62,6 +65,7 @@ public class ViewMessage extends Group {
 
 		setWidth(label.getPrefWidth() + 30);
 		back.setSize(getWidth(), getHeight());
+		fore.setSize(getWidth(), getHeight());
 
 		label.setPosition(15, getHeight() / 2);
 
@@ -80,6 +84,16 @@ public class ViewMessage extends Group {
 				Actions.moveBy(0, -getHeight(), 0.3f, Interpolation.circleIn)
 
 		));
+
+		if (durationMax > 5) fore.addAction(Actions.sequence(
+
+				Actions.alpha(1),
+				Actions.alpha(.0f, 0.2f, Interpolation.circleIn),
+				Actions.alpha(.5f, 0.05f, Interpolation.circleIn),
+				Actions.alpha(.0f, 0.05f, Interpolation.circleIn)
+
+		));
+
 	}
 
 	@Override
