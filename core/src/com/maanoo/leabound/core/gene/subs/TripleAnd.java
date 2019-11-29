@@ -2,8 +2,10 @@ package com.maanoo.leabound.core.gene.subs;
 
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.gene.BoardArea;
+import com.maanoo.leabound.core.gene.Consept;
 import com.maanoo.leabound.core.gene.SubGenerator.SubGeneratorTransform;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.AndGate;
@@ -16,7 +18,12 @@ import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.Ra;
 
+
 public class TripleAnd extends SubGeneratorTransform {
+
+	public TripleAnd() {
+		super(a(Consept.Logic, Consept.Medium));
+	}
 
 	@Override
 	public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
