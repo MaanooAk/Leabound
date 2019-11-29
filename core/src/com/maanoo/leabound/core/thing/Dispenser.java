@@ -6,6 +6,7 @@ import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
+
 public final class Dispenser extends StateThing {
 
 	private static final SimpleState Idle = new SimpleState("dispenser_idle", true);
@@ -17,7 +18,7 @@ public final class Dispenser extends StateThing {
 		this(location, rotation, new PickUp(null, item, rotation.origin));
 	}
 
-	public Dispenser(Location location, Direction rotation, PickUp dispenseObject) {
+	private Dispenser(Location location, Direction rotation, PickUp dispenseObject) {
 		super("Dispenser", location, rotation, Idle, Used);
 		this.dispenseObject = dispenseObject;
 	}

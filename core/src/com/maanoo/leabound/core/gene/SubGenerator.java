@@ -283,8 +283,8 @@ public abstract class SubGenerator {
 			final Location p4 = p3.cpy().mulAdd(rot.vector, 2);
 			final Location p5 = p3.cpy().mulAdd(rot.vector, -3);
 
-			final PickUp pickup1 = new PickUp(null, Item.Key, rot.origin);
-			final PickUp pickup2 = new PickUp(null, Item.MasterKey, rot.origin);
+			final Item pickup1 = Item.Key;
+			final Item pickup2 = Item.MasterKey;
 
 			if (Ra.bool()) {
 				board.addThing(new Switch(p1));
@@ -298,7 +298,7 @@ public abstract class SubGenerator {
 			}
 			board.addThing(new AndGate(p3, rot));
 			board.addThing(new Dispenser(p4, rot, pickup1));
-			board.addThing(new LockedChest(p5, pickup1.getItem(), pickup2));
+			board.addThing(new LockedChest(p5, pickup1, pickup2));
 
 			wire(board, p1, p3);
 			wire(board, p2, p3);
@@ -372,12 +372,12 @@ public abstract class SubGenerator {
 			final Item key2 = keys[1];
 
 			final PickUp pickup1 = new PickUp(p1, key1, 0);
-			final PickUp pickup2 = new PickUp(null, key2, Align.center);
-			final PickUp pickup3 = new PickUp(null, Item.Parts, Align.center);
+			final Item pickup2 = key2;
+			final Item pickup3 = Item.Parts;
 
 			board.addThing(pickup1);
 			board.addThing(new LockedChest(p2, pickup1.getItem(), pickup2));
-			board.addThing(new LockedChest(p3, pickup2.getItem(), pickup3));
+			board.addThing(new LockedChest(p3, pickup2, pickup3));
 
 			//
 

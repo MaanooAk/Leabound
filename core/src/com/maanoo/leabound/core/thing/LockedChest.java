@@ -1,5 +1,7 @@
 package com.maanoo.leabound.core.thing;
 
+import com.badlogic.gdx.utils.Align;
+
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.item.Item;
@@ -12,7 +14,11 @@ public final class LockedChest extends StaticThing {
 
 	private final PickUp pickup;
 
-	public LockedChest(Location location, Item key, PickUp pickup) {
+	public LockedChest(Location location, Item key, Item content) {
+		this(location, key, new PickUp(null, content, Align.center));
+	}
+
+	private LockedChest(Location location, Item key, PickUp pickup) {
 		super("Locked Chest", location, "locked-chest_" + key.getName(), true);
 		this.key = key;
 		this.pickup = pickup;
