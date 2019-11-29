@@ -1,20 +1,16 @@
 package com.maanoo.leabound.core.gene;
 
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Bound;
+import com.maanoo.leabound.core.gene.subs.GenReward;
 import com.maanoo.leabound.core.gene.subs.SimpleMaze;
 import com.maanoo.leabound.core.gene.subs.TripleAnd;
-import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.FakeWall;
-import com.maanoo.leabound.core.thing.LockedChest;
 import com.maanoo.leabound.core.thing.OnePassDoor;
-import com.maanoo.leabound.core.thing.PickUp;
-import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.thing.Wall;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.Ra;
@@ -67,7 +63,7 @@ public class Generator {
 
 		final int count;
 		if (coReward) {
-			count = 2;
+			count = 1;
 		} else {
 			count = Ra.random(splits).get();
 		}
@@ -88,18 +84,7 @@ public class Generator {
 			if (coReward) {
 
 				asubs.clear();
-				asubs.add(new WeightEntry<SubGenerator>(10, new SubGenerator.CenterThing(new ThingGenerator() {
-
-					private final Item[] items = new Item[] { Item.Parts, Item.UpgradeLife };
-
-					@Override
-					public Thing generate(Board board, Location location) {
-
-						return new LockedChest(location, Item.MasterKey, new PickUp(null,
-								Ra.random(items), Align.center));
-					}
-
-				})));
+				asubs.add(new WeightEntry<SubGenerator>(10, new GenReward()));
 
 			} else {
 
