@@ -12,8 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.maanoo.leabound.face.ScreenGame;
 
-
 public class LeaboundGame extends Game {
+
+	public static LeaboundGame I; // TODO remove
 
 	public LeaboundSkin skin;
 
@@ -21,6 +22,7 @@ public class LeaboundGame extends Game {
 
 	@Override
 	public void create() {
+		I = this;// TODO remove
 
 		skin = new LeaboundSkin("base");
 
@@ -47,7 +49,7 @@ public class LeaboundGame extends Game {
 			font.setFixedWidthGlyphs("t ");
 
 			Colors.put("warning", new Color(0xff9c00ff));
-//			Colors.put("unknown", new Color(0xffffff80));
+			Colors.put("fade", new Color(0xffffff80));
 			Colors.put("key", new Color(0xf0f000ff));
 			Colors.put("part", new Color(0x46c1e4FF));
 			Colors.put("leap", new Color(0xed4defFF));

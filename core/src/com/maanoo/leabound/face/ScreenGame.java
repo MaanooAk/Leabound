@@ -15,15 +15,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.Align;
 import com.maanoo.leabound.LeaboundGame;
 import com.maanoo.leabound.core.Player;
+import com.maanoo.leabound.core.Statistics;
 import com.maanoo.leabound.core.World;
 import com.maanoo.leabound.core.board.Board;
-import com.maanoo.leabound.core.board.BoardBuilder;
 import com.maanoo.leabound.core.board.Boards;
 import com.maanoo.leabound.core.board.Bound;
 import com.maanoo.leabound.core.gene.Generator;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.util.Location;
+import com.maanoo.leabound.face.widget.GroupParti;
 import com.maanoo.leabound.face.widget.ViewBag;
 import com.maanoo.leabound.face.widget.ViewBound;
 import com.maanoo.leabound.face.widget.ViewLife;
@@ -32,7 +33,6 @@ import com.maanoo.leabound.face.widget.ViewPlayer;
 import com.maanoo.leabound.face.widget.ViewShadow;
 import com.maanoo.leabound.face.widget.ViewThing;
 import com.maanoo.leabound.face.widget.ViewsThing;
-
 
 public class ScreenGame extends StageScreen {
 
@@ -88,9 +88,17 @@ public class ScreenGame extends StageScreen {
 			final Image background = new Image(game.skin.getDrawable("solid-green"));
 			background.setSize(width, height);
 			background.setPosition(0, 0);
-//			background.addAction(faiding(3, Interpolation.sine));
+//			background.addAction(Actions.forever(Actions.sequence(
+//
+//					Actions.fadeIn(5),
+//					Actions.fadeOut(5)
+//
+//					)));
 			getStage().addActor(background);
 		}
+
+		vParti = new GroupParti(game.skin, width, height, gsize);
+		getStage().addActor(vParti);
 
 		damage = new Image(game.skin, "solid-red");
 		damage.getColor().a = 0;
@@ -98,23 +106,9 @@ public class ScreenGame extends StageScreen {
 		getStage().addActor(damage);
 
 		{
+			if (Statistics.Run.time > 0) Statistics.endRun();
 
-			world.setBoard(new BoardBuilder("Menu", 14, 10, ""
-
-					+ "              \n"
-					+ "              \n"
-					+ "              \n"
-					+ "           S  \n"
-					+ "           -  \n"
-					+ "           -  \n"
-					+ "  -----P   N  \n"
-					+ "  -        -  \n"
-					+ "  1        2  \n"
-					+ "              \n"
-
-					, "x", "wall 50", "1", "display Move\nV\nArrows_/_WASD", "2", "display Leap\nV\nSpace"
-
-			).build(player, new Bound(14, 10, player)));
+			world.setBoard(Boards.generateFirstBoard(player));
 
 			vBound = new ViewBound(game.skin, gsize);
 			group.addActor(vBound);
@@ -135,11 +129,6 @@ public class ScreenGame extends StageScreen {
 		logo.setFontScale(4);
 		logo.setPosition(width / 2, height - 80, Align.top);
 		group.addActor(logo);
-
-//		final Image logo = new Image(game.skin.getDrawable("logo-30"));
-//		logo.setSize(30 * 4, 30 * 4);
-//		logo.setPosition(width / 2, height - 10, Align.top);
-//		group.addActor(logo);
 
 		version = new Label("Leabound - v 0.1", game.skin);
 		version.setPosition(5, 5, Align.bottomLeft);
@@ -164,24 +153,8 @@ public class ScreenGame extends StageScreen {
 		vMessage.setFixedPosition(width, 0, Align.bottomRight);
 		getStage().addActor(vMessage);
 
-//		fadeIn(keys1, .4f);
-//		fadeIn(keys2, .45f);
-
-//		final Label start = new Label("Leap to start", game.skin);
-//		start.setPosition(width * .5f, height * .5f, Align.center);
-//		group.addActor(start);
-
 		player.messages.add("*[leap]Leap[] to start[]");
 	}
-
-//	private void fadeIn(Actor actor, float delay) {
-//
-//		actor.getColor().a = 0;
-//
-//		actor.addAction(Actions.sequence(
-//				Actions.delay(delay),
-//				Actions.fadeIn(.3f)));
-//	}
 
 	@Override
 	public void changed(ChangeEvent event, Actor actor) {
@@ -190,7 +163,7 @@ public class ScreenGame extends StageScreen {
 
 	@Override
 	protected void handleInputEvent(InputEvent event) {
-//		final Board board = world.board;
+		// final Board board = world.board;
 
 		if (event.getType() != InputEvent.Type.keyDown)
 			return;
@@ -221,6 +194,10 @@ public class ScreenGame extends StageScreen {
 
 				world.getBoard().getBound().setMult(-1, 2);
 
+			} else if (game.debug && event.getKeyCode() == Keys.X) {
+
+				world.getBoard().getBound().update(1000);
+
 			} else if (game.debug && event.getKeyCode() == Keys.L) {
 
 				world.getPlayer().addLife(1);
@@ -231,6 +208,8 @@ public class ScreenGame extends StageScreen {
 
 	private void playerLeap() {
 		final Player player = world.getPlayer();
+
+		if (player.boardIndex == 0) Statistics.newRun();
 
 		if (player.isLeaping())
 			return;
@@ -276,11 +255,24 @@ public class ScreenGame extends StageScreen {
 					}
 
 				})));
+
+		vParti.addAction(Actions.sequence(
+
+				Actions.moveBy(-distance * dx, -distance * dy, duration, Interpolation.sineOut),
+				Actions.moveBy(2 * distance * dx, 2 * distance * dy),
+
+				Actions.moveBy(-distance * dx, -distance * dy, duration, Interpolation.circleOut)
+
+		));
+
+		Statistics.Run.leaps += 1;
 	}
 
 	private void playerMove(final int x, final int y) {
 		dx = x;
 		dy = y;
+
+		Statistics.Run.taps += 1;
 
 		if (group.hasActions())
 			return;
@@ -346,14 +338,12 @@ public class ScreenGame extends StageScreen {
 
 					board.removeThing(i.getLocation());
 
-//					thingImages.get(i).remove();
-//					thingImages.remove(i);
-
 					change = true;
 					break;
 				}
 			}
 
+			Statistics.Run.moves += 1;
 		}
 
 		vPlayer.move(dx, dy);
@@ -363,6 +353,7 @@ public class ScreenGame extends StageScreen {
 
 	private HashMap<Thing, ViewThing> thingImages = new HashMap<Thing, ViewThing>();
 	private Label logo;
+	private GroupParti vParti;
 
 	private void newGroup() {
 		group.clearChildren();
@@ -398,16 +389,14 @@ public class ScreenGame extends StageScreen {
 	public void render(float delta) {
 		super.render(delta);
 
+		Statistics.Run.time += delta; // TODO make start end
+
 		final Board board = world.getBoard();
 		final Player player = world.getPlayer();
 
 		final Bound bound = board.getBound();
 
 		bound.update(delta);
-
-//		final Rectangle rec = new Rectangle();
-//		rec.setSize(((int) bound.w / gsize / 2) * 2, ((int) bound.h / gsize / 2) * 2);
-//		rec.setCenter(0, 0);
 
 		if (!player.isLeaping() && !board.getBound().contains(player.location)) {
 
@@ -425,9 +414,7 @@ public class ScreenGame extends StageScreen {
 						Actions.fadeOut(1, Interpolation.sine)));
 
 				vShadow.setVisible(false);
-//				playerImage.addAction(Actions.sequence());
 
-//				getStage().getRoot().setOrigin(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 				getStage().addAction(Actions.sequence(
 
 						new ShakeAction(20, .5f),
