@@ -243,7 +243,7 @@ public abstract class SubGenerator {
 
 			final Location p4 = p3.cpy().mulAdd(rot.vector, 2);
 
-			final PickUp pickup = new PickUp(null, Item.Parts, rot.origin);
+			final Item pickup = Item.Parts;
 
 			if (Ra.bool()) {
 				board.addThing(new Switch(p1));

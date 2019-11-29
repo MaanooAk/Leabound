@@ -4,6 +4,7 @@ import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
+
 public final class NotGate extends Gate {
 
 	public NotGate(Location location, Direction rotation) {

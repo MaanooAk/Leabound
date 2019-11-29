@@ -1,11 +1,13 @@
 package com.maanoo.leabound.core.thing;
 
 import com.badlogic.gdx.utils.Align;
+
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
+
 
 public final class FakeWall extends Thing {
 

@@ -7,6 +7,7 @@ import java.util.Random;
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.Statistics;
 
+
 public class Boards {
 
 	public static final HashMap<Integer, BoardBuilder> fixed = new HashMap<Integer, BoardBuilder>();

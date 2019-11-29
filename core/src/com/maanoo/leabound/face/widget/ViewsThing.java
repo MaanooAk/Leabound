@@ -1,6 +1,7 @@
 package com.maanoo.leabound.face.widget;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 import com.maanoo.leabound.core.thing.Display;
 import com.maanoo.leabound.core.thing.Thing;
 

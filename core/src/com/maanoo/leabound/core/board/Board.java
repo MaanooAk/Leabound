@@ -7,6 +7,7 @@ import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.VectorMap;
 
+
 public class Board implements Iterable<Thing> {
 
 	public final String name;

@@ -5,9 +5,9 @@ package com.maanoo.leabound.core.util;
  * <p>
  * The weight may change over time.
  *
- * @param <T> the type of entry
+ * @param  <T> the type of entry
  *
- * @author Akritas Akritidis
+ * @author     Akritas Akritidis
  */
 public final class WeightEntry<T> implements Weight {
 

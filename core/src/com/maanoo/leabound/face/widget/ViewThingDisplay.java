@@ -6,11 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
+
 import com.maanoo.leabound.LeaboundGame;
 import com.maanoo.leabound.core.Statistics;
 import com.maanoo.leabound.core.thing.Display;
 import com.maanoo.leabound.face.ScreenGame;
 import com.maanoo.leabound.face.StageScreen;
+
 
 public class ViewThingDisplay extends ViewThing {
 

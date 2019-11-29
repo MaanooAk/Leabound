@@ -1,6 +1,7 @@
 package com.maanoo.leabound.core.board;
 
 import com.badlogic.gdx.utils.Align;
+
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.AndGate;
@@ -133,8 +134,7 @@ public class BoardBuilder {
 			final Item unlock = parseItem(parts[1]);
 			final Item item = parseItem(parts[2]);
 
-			return new LockedChest(location, unlock,
-					new PickUp(null, item, Align.center));
+			return new LockedChest(location, unlock, item);
 
 		} else if (parts[0].equals("door")) {
 			final Item unlock = parseItem(parts[1]);

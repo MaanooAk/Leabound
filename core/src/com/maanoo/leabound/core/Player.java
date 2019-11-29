@@ -1,10 +1,12 @@
 package com.maanoo.leabound.core;
 
 import com.badlogic.gdx.utils.Array;
+
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.item.ItemBundle;
 import com.maanoo.leabound.core.util.Location;
+
 
 public class Player {
 

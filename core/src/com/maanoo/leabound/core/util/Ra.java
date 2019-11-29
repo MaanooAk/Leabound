@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.utils.Array;
 
+
 /**
  * Collection of random number and object selector.
  * <p>
@@ -64,7 +65,8 @@ public final class Ra {
 	public static <T extends Weight> T randomWeighted(Array<T> array) {
 
 		float unit = 0;
-		for (final T i : array) unit += i.weight();
+		for (final T i : array)
+			unit += i.weight();
 
 		float target = next(unit);
 		for (final T i : array) {

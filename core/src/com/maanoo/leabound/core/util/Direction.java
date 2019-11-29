@@ -31,6 +31,7 @@ public enum Direction {
 
 	/**
 	 * Returns a random direction.
+	 * 
 	 * @return one of the four directions
 	 */
 	public static Direction random() {

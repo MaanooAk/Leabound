@@ -4,11 +4,12 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.utils.ObjectIntMap;
 import com.badlogic.gdx.utils.ObjectIntMap.Entry;
+
 import com.maanoo.leabound.core.util.Mod;
 
 
 /**
- * Collection of  {@link Item}.
+ * Collection of {@link Item}.
  * <p>
  * On iteration item counts may be zero.
  *

@@ -5,7 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
+
 import com.maanoo.leabound.core.util.Ra;
+
 
 public class GroupParti extends Group {
 
@@ -58,7 +60,6 @@ public class GroupParti extends Group {
 		@Override
 		public void act(float delta) {
 			super.act(delta);
-
 
 			if (!hasActions()) {
 				group.re(this);

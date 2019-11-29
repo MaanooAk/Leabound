@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import com.maanoo.leabound.LeaboundGame;
 
 
@@ -102,7 +103,8 @@ public abstract class StageScreen implements Screen {
 	}
 
 	public final void addAll(Actor... actors) {
-		for (final Actor i : actors) stage.addActor(i);
+		for (final Actor i : actors)
+			stage.addActor(i);
 	}
 
 	public abstract void changed(ChangeEvent event, Actor actor);
@@ -158,7 +160,8 @@ public abstract class StageScreen implements Screen {
 		actor.remove();
 		parent.addActor(actor);
 
-		while (actor.hasActions()) actor.act(1000);
+		while (actor.hasActions())
+			actor.act(1000);
 	}
 
 	public void fadeScreen(final StageScreen screen, float delay) {

@@ -1,8 +1,10 @@
 package com.maanoo.leabound.core.board;
 
 import com.badlogic.gdx.utils.Align;
+
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
+
 
 public class BoardTransfom {
 

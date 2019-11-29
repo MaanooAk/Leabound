@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.item.Item;
 
@@ -72,7 +73,7 @@ public class ViewBag extends ViewMod {
 
 			final int count = player.bag.get(i);
 
-			final Label label = new Label(" " + (count == 1 ? "" : (count+ " ")) + "", skin);
+			final Label label = new Label(" " + (count == 1 ? "" : (count + " ")) + "", skin);
 			final Image icon = new Image(skin, i.getName());
 			icon.setOrigin(Align.center);
 

@@ -3,6 +3,7 @@ package com.maanoo.leabound.core.board;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.util.Location;
 

@@ -4,7 +4,7 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.util.Location;
 
 
-public  final class PressurePlate extends StateThing {
+public final class PressurePlate extends StateThing {
 
 	private static final SimpleState Idle = new SimpleState("pressure-plate_idle", false);
 	private static final SimpleState Pressed = new SimpleState("pressure-plate_pressed", false);

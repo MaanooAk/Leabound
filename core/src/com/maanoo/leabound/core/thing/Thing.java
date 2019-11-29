@@ -1,12 +1,14 @@
 package com.maanoo.leabound.core.thing;
 
 import com.badlogic.gdx.utils.Align;
+
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.Mod;
+
 
 /**
  * Abstract thing of the {@link Board}.
@@ -117,9 +119,9 @@ public abstract class Thing extends Mod {
 	/**
 	 * Called when another thing changes.
 	 *
-	 * @param  thing the thing that changed
-	 * @param player the player
-	 * @return       if there was a change
+	 * @param  thing  the thing that changed
+	 * @param  player the player
+	 * @return        if there was a change
 	 */
 	public boolean onThingActiveChange(Thing thing, Player player) {
 		return false;
