@@ -4,9 +4,8 @@ import com.badlogic.gdx.utils.Align;
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.util.Direction;
-import com.maanoo.leabound.core.util.Mod;
 import com.maanoo.leabound.core.util.Location;
-
+import com.maanoo.leabound.core.util.Mod;
 
 /**
  * Abstract thing of the {@link Board}.
@@ -15,9 +14,9 @@ import com.maanoo.leabound.core.util.Location;
  */
 public abstract class Thing extends Mod {
 
-	private String name;
-	private Location location;
-	private Direction rotation;
+	private final String name;
+	private final Location location;
+	private final Direction rotation;
 
 	private boolean active;
 	private boolean destroyed;
@@ -33,6 +32,12 @@ public abstract class Thing extends Mod {
 		this.name = name;
 		this.location = location == null ? new Location() : location;
 		this.rotation = rotation == null ? Direction.Default : rotation;
+
+		active = false;
+		destroyed = false;
+	}
+
+	public void reset() {
 
 		active = false;
 		destroyed = false;
@@ -68,8 +73,8 @@ public abstract class Thing extends Mod {
 	/**
 	 * Called when player enters the same location.
 	 *
-	 * @param player the player
-	 * @return if there was a change
+	 * @param  player the player
+	 * @return        if there was a change
 	 */
 	public boolean onPlayerEnter(Player player) {
 		return false;
@@ -78,8 +83,8 @@ public abstract class Thing extends Mod {
 	/**
 	 * Called when player leaves the same location.
 	 *
-	 * @param player the player
-	 * @return if there was a change
+	 * @param  player the player
+	 * @return        if there was a change
 	 */
 	public boolean onPlayerLeave(Player player) {
 		return false;
@@ -88,8 +93,8 @@ public abstract class Thing extends Mod {
 	/**
 	 * Called when player tries to enter the same location but is blocked.
 	 *
-	 * @param player the player
-	 * @return if there was a change
+	 * @param  player the player
+	 * @return        if there was a change
 	 */
 	public boolean onPlayerBounce(Player player) {
 		return false;
@@ -107,8 +112,8 @@ public abstract class Thing extends Mod {
 	/**
 	 * Called when another thing changes.
 	 *
-	 * @param thing the thing that changed
-	 * @return if there was a change
+	 * @param  thing the thing that changed
+	 * @return       if there was a change
 	 */
 	public boolean onThingActiveChange(Thing thing) {
 		return false;

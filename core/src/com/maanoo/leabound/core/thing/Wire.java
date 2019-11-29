@@ -3,7 +3,6 @@ package com.maanoo.leabound.core.thing;
 import com.badlogic.gdx.utils.Array;
 import com.maanoo.leabound.core.util.Location;
 
-
 public final class Wire extends StateThing {
 
 	// TODO simplify
@@ -17,6 +16,12 @@ public final class Wire extends StateThing {
 		super("Wire", location, null, Off, On);
 
 		sources = new Array<Thing>(4);
+	}
+
+	@Override
+	public void reset() {
+
+		sources.clear();
 	}
 
 	// === events ===

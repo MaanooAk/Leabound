@@ -23,6 +23,13 @@ public class Display extends StateThing {
 	}
 
 	@Override
+	public void reset() {
+		super.reset();
+
+		internal.reset();
+	}
+
+	@Override
 	public boolean onThingActiveChange(Thing thing) {
 
 		if (!internal.onThingActiveChange(thing)) return false;

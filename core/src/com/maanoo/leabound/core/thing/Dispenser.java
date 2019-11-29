@@ -10,7 +10,7 @@ public final class Dispenser extends StateThing {
 	private static final SimpleState Idle = new SimpleState("dispenser_idle", true);
 	private static final SimpleState Used = new SimpleState("dispenser_used", true);
 
-	private final Board board;
+	private final Board board; // TODO remove
 	private final PickUp dispenseObject;
 
 	public Dispenser(Location location, Direction rotation, Board board, PickUp dispenseObject) {

@@ -6,7 +6,6 @@ import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
-
 public final class FakeWall extends Thing {
 
 	// TODO crate abstract of health kind things
@@ -24,6 +23,13 @@ public final class FakeWall extends Thing {
 		};
 
 		health = drawables.length;
+		damage = 0;
+	}
+
+	@Override
+	public void reset() {
+		super.reset();
+
 		damage = 0;
 	}
 

@@ -17,6 +17,13 @@ public abstract class StateThing extends Thing {
 		state = 0;
 	}
 
+	@Override
+	public void reset() {
+		super.reset();
+
+		state = 0;
+	}
+
 	protected final boolean nextState() {
 		assert states.length > 1;
 

@@ -29,6 +29,13 @@ public abstract class Gate extends Thing {
 	}
 
 	@Override
+	public void reset() {
+		super.reset();
+
+		internal.reset();
+	}
+
+	@Override
 	public final boolean isBlocking() {
 		return false;
 	}
