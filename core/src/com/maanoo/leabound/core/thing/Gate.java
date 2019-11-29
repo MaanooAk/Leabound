@@ -1,5 +1,6 @@
 package com.maanoo.leabound.core.thing;
 
+import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
@@ -32,6 +33,9 @@ public abstract class Gate extends Thing {
 	public void reset() {
 		super.reset();
 
+		outputLocation.set(getLocation()).add(getRotation().vector);
+
+		internal.getLocation().set(getLocation());
 		internal.reset();
 	}
 
@@ -43,14 +47,14 @@ public abstract class Gate extends Thing {
 	// === events ===
 
 	@Override
-	public final boolean onCreate() {
-		return onThingActiveChange(this);
+	public final boolean onCreate(Player player) {
+		return onThingActiveChange(this, player);
 	}
 
 	@Override
-	public final boolean onThingActiveChange(Thing thing) {
+	public final boolean onThingActiveChange(Thing thing, Player player) {
 
-		if (!internal.onThingActiveChange(thing)) return false;
+		if (!internal.onThingActiveChange(thing, player)) return false;
 		internal.getSources().removeValue(this, true);
 
 //		internal.onThingActiveChange(thing);

@@ -1,5 +1,6 @@
 package com.maanoo.leabound.core.thing;
 
+import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.util.Location;
 
 
@@ -26,13 +27,14 @@ public class Display extends StateThing {
 	public void reset() {
 		super.reset();
 
+		internal.getLocation().set(getLocation());
 		internal.reset();
 	}
 
 	@Override
-	public boolean onThingActiveChange(Thing thing) {
+	public boolean onThingActiveChange(Thing thing, Player player) {
 
-		if (!internal.onThingActiveChange(thing)) return false;
+		if (!internal.onThingActiveChange(thing, player)) return false;
 
 		if (internal.isActive() && getState() == Off) {
 			return nextState();

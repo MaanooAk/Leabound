@@ -71,11 +71,11 @@ public class Bound {
 
 	// === access ===
 
-	public float getWidth() {
+	public int getWidth() {
 		return size.x;
 	}
 
-	public float getHeight() {
+	public int getHeight() {
 		return size.y;
 	}
 

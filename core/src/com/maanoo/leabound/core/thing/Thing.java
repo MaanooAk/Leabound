@@ -103,9 +103,10 @@ public abstract class Thing extends Mod {
 	/**
 	 * Called when the object is created.
 	 *
-	 * @return if there was a change
+	 * @param  player the player
+	 * @return        if there was a change
 	 */
-	public boolean onCreate() {
+	public boolean onCreate(Player player) {
 		return false;
 	}
 
@@ -113,9 +114,10 @@ public abstract class Thing extends Mod {
 	 * Called when another thing changes.
 	 *
 	 * @param  thing the thing that changed
+	 * @param player the player
 	 * @return       if there was a change
 	 */
-	public boolean onThingActiveChange(Thing thing) {
+	public boolean onThingActiveChange(Thing thing, Player player) {
 		return false;
 	}
 

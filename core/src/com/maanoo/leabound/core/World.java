@@ -28,7 +28,7 @@ public class World {
 				boolean change = false;
 				if (board.getThing(player.location).onPlayerEnter(player)) {
 					change = true;
-					board.updateOnActvateChange(board.getThing(player.location));
+					board.updateOnActvateChange(board.getThing(player.location), player);
 				}
 
 				// TODO refactor to method

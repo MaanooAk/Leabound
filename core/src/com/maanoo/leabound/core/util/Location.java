@@ -19,8 +19,8 @@ public class Location {
 		this.y = y;
 	}
 
-	public Location(Location vector) {
-		this(Math.round(vector.x), Math.round(vector.y));
+	public Location(Location location) {
+		this(location.x, location.y);
 	}
 
 	public Location cpy() {
@@ -61,6 +61,11 @@ public class Location {
 		final float x_d = v.x - x;
 		final float y_d = v.y - y;
 		return x_d * x_d + y_d * y_d;
+	}
+
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ")";
 	}
 
 	@Override

@@ -127,7 +127,7 @@ public class BoardBuilder {
 			final Direction rotation = parseRotation(parts[1]);
 			final Item item = parseItem(parts[2]);
 
-			return new Dispenser(location, rotation, board,
+			return new Dispenser(location, rotation,
 					new PickUp(null, item, rotation.origin));
 
 		} else if (parts[0].equals("locked-chest")) {

@@ -13,8 +13,8 @@ import com.maanoo.leabound.core.thing.Switch;
 import com.maanoo.leabound.core.thing.Wall;
 import com.maanoo.leabound.core.thing.Wire;
 import com.maanoo.leabound.core.util.Direction;
-import com.maanoo.leabound.core.util.Ra;
 import com.maanoo.leabound.core.util.Location;
+import com.maanoo.leabound.core.util.Ra;
 
 
 public abstract class SubGenerator {
@@ -139,7 +139,7 @@ public abstract class SubGenerator {
 				board.addThing(new PressurePlate(p2));
 			}
 			board.addThing(new AndGate(p3, rot));
-			board.addThing(new Dispenser(p4, rot, board, pickup));
+			board.addThing(new Dispenser(p4, rot, pickup));
 
 			wire(board, p1, p3);
 			wire(board, p2, p3);
@@ -180,7 +180,7 @@ public abstract class SubGenerator {
 				board.addThing(new PressurePlate(p2));
 			}
 			board.addThing(new AndGate(p3, rot));
-			board.addThing(new Dispenser(p4, rot, board, pickup1));
+			board.addThing(new Dispenser(p4, rot, pickup1));
 			board.addThing(new LockedChest(p5, pickup1.getItem(), board, pickup2));
 
 			wire(board, p1, p3);
