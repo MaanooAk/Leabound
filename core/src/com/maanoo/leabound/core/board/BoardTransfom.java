@@ -107,4 +107,35 @@ public class BoardTransfom {
 
 	};
 
+	public static final BoardTransfom Rotate = new BoardTransfom("FlipY") {
+
+		@Override
+		public void location(Location location, int x, int y, int w, int h) {
+
+			final int rx = location.y - y + x;
+			final int ry = location.x - x + y;
+
+			location.set(rx, ry);
+		}
+
+		@Override
+		public Direction rotation(Direction direction) {
+			if (direction == Direction.Up) return Direction.Left;
+			if (direction == Direction.Left) return Direction.Down;
+			if (direction == Direction.Down) return Direction.Right;
+			if (direction == Direction.Right) return Direction.Up;
+			return direction;
+		}
+
+		@Override
+		public int align(int align) {
+			if (align == Align.bottom) return Align.right;
+			if (align == Align.right) return Align.top;
+			if (align == Align.top) return Align.left;
+			if (align == Align.left) return Align.bottom;
+			return align;
+		}
+
+	};
+
 }

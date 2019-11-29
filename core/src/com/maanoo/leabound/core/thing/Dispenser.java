@@ -2,6 +2,7 @@ package com.maanoo.leabound.core.thing;
 
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.BoardTransfom;
+import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 
@@ -11,6 +12,10 @@ public final class Dispenser extends StateThing {
 	private static final SimpleState Used = new SimpleState("dispenser_used", true);
 
 	private final PickUp dispenseObject;
+
+	public Dispenser(Location location, Direction rotation, Item item) {
+		this(location, rotation, new PickUp(null, item, rotation.origin));
+	}
 
 	public Dispenser(Location location, Direction rotation, PickUp dispenseObject) {
 		super("Dispenser", location, rotation, Idle, Used);

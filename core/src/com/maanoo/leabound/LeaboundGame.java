@@ -15,6 +15,7 @@ import com.maanoo.leabound.face.ScreenGame;
 public class LeaboundGame extends Game {
 
 	// TODO fix the vector to location transition (many are named vector)
+	// TODO tutorial for not
 
 	public static LeaboundGame I; // TODO remove
 

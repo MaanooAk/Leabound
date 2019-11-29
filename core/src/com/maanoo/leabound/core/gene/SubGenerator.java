@@ -1,15 +1,19 @@
 package com.maanoo.leabound.core.gene;
 
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.maanoo.leabound.core.board.Board;
+import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.AndGate;
 import com.maanoo.leabound.core.thing.Dispenser;
 import com.maanoo.leabound.core.thing.LockedChest;
+import com.maanoo.leabound.core.thing.NotGate;
 import com.maanoo.leabound.core.thing.OnePassDoor;
 import com.maanoo.leabound.core.thing.PickUp;
 import com.maanoo.leabound.core.thing.PressurePlate;
 import com.maanoo.leabound.core.thing.Switch;
+import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.thing.Wall;
 import com.maanoo.leabound.core.thing.Wire;
 import com.maanoo.leabound.core.util.Direction;
@@ -26,6 +30,65 @@ public abstract class SubGenerator {
 	public abstract boolean can(Board board, BoardArea area, int emptyAreas);
 
 	public abstract Object generate(Board board, BoardArea area, float level);
+
+	// === abstract ===
+
+	public static abstract class SubGeneratorTransform extends SubGenerator {
+
+		private final BoardTransfom[] transforms;
+
+		public SubGeneratorTransform(BoardTransfom... transforms) {
+			this.transforms = transforms;
+		}
+
+		public SubGeneratorTransform() {
+			this(BoardTransfom.Identity, BoardTransfom.FlipX, BoardTransfom.FlipY, BoardTransfom.FlipXY);
+		}
+
+		@Override
+		public final Object generate(Board board, BoardArea area, float level) {
+			final Array<Thing> things = new Array<Thing>();
+
+			final BoardTransfom tra = Ra.random(transforms);
+
+			final int x = area.x;
+			final int y = area.y;
+			final int w = area.w;
+			final int h = area.h;
+
+			final BoardArea harea;
+			if (!area.isHorizontal()) {
+				// TODO rotate area.align
+				harea = new BoardArea(area.x, area.y, area.h, area.w, area.align);
+			} else {
+				harea = area;
+			}
+
+			generate(things, harea, level);
+
+			if (!area.isHorizontal()) {
+
+				final BoardTransfom traR = BoardTransfom.Rotate;
+
+				for (final Thing i : things) {
+					traR.location(i.getLocation(), x, y, w, h);
+					i.reset(traR);
+				}
+			}
+
+			for (final Thing i : things) {
+				tra.location(i.getLocation(), x, y, w, h);
+				i.reset(tra);
+
+				board.addThing(i);
+			}
+
+			return null;
+		}
+
+		public abstract void generate(Array<Thing> things, BoardArea area, float level);
+
+	}
 
 	// === impls ===
 
@@ -260,6 +323,74 @@ public abstract class SubGenerator {
 			}
 
 			return null;
+		}
+
+	}
+
+	public static class LogicProblem3 extends SubGeneratorTransform {
+
+		@Override
+		public boolean can(Board board, BoardArea area, int emptyAreas) {
+			return area.getLocations() > LocationsSM
+					&& area.getLocations() < LocationsMB;
+		}
+
+		@Override
+		public void generate(Array<Thing> things, BoardArea area, float level) {
+
+			final Location p = area.get(Align.center);
+
+//			things.add(new Wire(area.get(Align.topRight)));
+//			things.add(new Wire(area.get(Align.topLeft)));
+//			things.add(new Wire(area.get(Align.bottomRight)));
+//			things.add(new Wire(area.get(Align.bottomLeft)));
+
+			final Direction dispencerRotation = Ra.random(Direction.Left, Direction.Left, Direction.Up, Direction.Down);
+
+			final int perm = Ra.next(3);
+
+			p.add(-4, 0);
+			things.add(new Dispenser(p.cpy(), dispencerRotation, Item.Parts));
+			p.add(1, 0);
+			things.add(new Wire(p.cpy()));
+			p.add(1, 0);
+			things.add(new AndGate(p.cpy(), Direction.Left));
+			things.add(new Wire(p.cpy().add(0, 1)));
+			things.add(new Wire(p.cpy().add(0, -1)));
+			p.add(1, 0);
+			if (perm == 0) {
+				things.add(new Wire(p.cpy().add(0, 1)));
+				things.add(new NotGate(p.cpy().add(0, -1), Direction.Left));
+			} else if (perm == 1) {
+				things.add(new NotGate(p.cpy().add(0, 1), Direction.Left));
+				things.add(new Wire(p.cpy().add(0, -1)));
+			} else {
+				things.add(new Wire(p.cpy().add(0, 1)));
+				things.add(new Wire(p.cpy().add(0, -1)));
+			}
+			p.add(1, 0);
+			things.add(new Wire(p.cpy().add(0, 1)));
+			things.add(new Wire(p.cpy().add(0, -1)));
+			p.add(1, 0);
+			things.add(new AndGate(p.cpy().add(0, 1), Direction.Left));
+			things.add(new AndGate(p.cpy().add(0, -1), Direction.Left));
+			things.add(new Wire(p.cpy().add(0, 2)));
+			things.add(new Wire(p.cpy().add(0, 0)));
+			things.add(new Wire(p.cpy().add(0, -2)));
+			p.add(1, 0);
+			things.add(new Wire(p.cpy().add(0, 2)));
+			if (perm == 2) {
+				things.add(new NotGate(p.cpy().add(0, 0), Direction.Left));
+			} else {
+				things.add(new Wire(p.cpy().add(0, 0)));
+			}
+			things.add(new Wire(p.cpy().add(0, -2)));
+			p.add(1, 0);
+			things.add(new Switch(p.cpy().add(0, 2)));
+			things.add(new Wire(p.cpy().add(0, 0)));
+			things.add(new Switch(p.cpy().add(1, 0)));
+			things.add(new Switch(p.cpy().add(0, -2)));
+
 		}
 
 	}

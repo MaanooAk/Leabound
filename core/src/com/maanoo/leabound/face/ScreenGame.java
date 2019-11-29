@@ -370,7 +370,7 @@ public class ScreenGame extends StageScreen {
 
 		player.boardIndex += 1;
 
-		if (Boards.fixed.containsKey(player.boardIndex)) {
+		if (Boards.fixed.containsKey(player.boardIndex) && false) {
 
 			world.setBoard(Boards.fixed.get(player.boardIndex).build(player));
 

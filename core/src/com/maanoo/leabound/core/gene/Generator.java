@@ -40,6 +40,7 @@ public class Generator {
 
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem1()));
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.OnePassProblem()));
+		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem3()));
 
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem2()));
 	}
@@ -64,6 +65,7 @@ public class Generator {
 		} else {
 			count = Ra.random(splits).get();
 		}
+//		System.out.println("Splits: " + count);
 
 		splitBoardArea(areas, count);
 
@@ -104,13 +106,14 @@ public class Generator {
 
 			sub.get().generate(b, i, player.getLevel());
 
+			// keep for debugging
 //			for (int x = 1; x < i.w - 1; x++) {
-//				b.addThing(new OnePassDoor(new Vector2(i.x + x, i.y)));
-//				b.addThing(new OnePassDoor(new Vector2(i.x + x, i.y + i.h - 1)));
+//				b.addThing(new OnePassDoor(new Location(i.x + x, i.y)));
+//				b.addThing(new OnePassDoor(new Location(i.x + x, i.y + i.h - 1)));
 //			}
 //			for (int y = 1; y < i.h - 1; y++) {
-//				b.addThing(new OnePassDoor(new Vector2(i.x, i.y + y)));
-//				b.addThing(new OnePassDoor(new Vector2(i.x + i.w - 1, i.y + y)));
+//				b.addThing(new OnePassDoor(new Location(i.x, i.y + y)));
+//				b.addThing(new OnePassDoor(new Location(i.x + i.w - 1, i.y + y)));
 //			}
 
 		}
@@ -129,6 +132,8 @@ public class Generator {
 				b.addThing(new OnePassDoor(new Location(0, 0)));
 			}
 		}
+
+		b.onCreate();
 
 		return b;
 	}
