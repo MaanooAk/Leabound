@@ -6,6 +6,7 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Bound;
+import com.maanoo.leabound.core.gene.subs.SimpleMaze;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.FakeWall;
 import com.maanoo.leabound.core.thing.LockedChest;
@@ -43,6 +44,7 @@ public class Generator {
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem3()));
 
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem2()));
+		subs.add(new WeightEntry<SubGenerator>(100, new SimpleMaze()));
 	}
 
 	public final Board generate(Player player) {
@@ -73,6 +75,8 @@ public class Generator {
 
 		final Array<WeightEntry<SubGenerator>> asubs = new Array<WeightEntry<SubGenerator>>();
 
+		int padding = 0;
+
 		int emptyAreas = areas.size;
 		for (final BoardArea i : areas) {
 			emptyAreas -= 1;
@@ -102,9 +106,11 @@ public class Generator {
 
 			}
 
-			final WeightEntry<SubGenerator> sub = Ra.randomWeighted(asubs);
+			final SubGenerator sub = Ra.randomWeighted(asubs).get();
 
-			sub.get().generate(b, i, player.getLevel());
+			sub.generate(b, i, player.getLevel());
+
+			padding = Math.max(padding, sub.getPadding());
 
 			// keep for debugging
 //			for (int x = 1; x < i.w - 1; x++) {
@@ -118,7 +124,7 @@ public class Generator {
 
 		}
 
-		decorate(b, area);
+		decorate(b, area, padding);
 
 		// == transform
 
@@ -156,7 +162,7 @@ public class Generator {
 
 	}
 
-	private void decorate(Board b, BoardArea area) {
+	private void decorate(Board b, BoardArea area, int padding) {
 		final Location i = new Location();
 		final Location inext1 = new Location();
 		final Location inext2 = new Location();
@@ -168,7 +174,7 @@ public class Generator {
 				i.set(area.x + x, area.y + y);
 
 				if (b.hasThing(i)) {
-					using.extend(i, 1);
+					using.extend(i, padding);
 				}
 			}
 		}

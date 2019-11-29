@@ -27,6 +27,10 @@ public class Location {
 		return new Location(x, y);
 	}
 
+	public Location cpy(int dx, int dy) {
+		return new Location(x, y).add(dx, dy);
+	}
+
 	public Location set(Location vector) {
 		this.x = vector.x;
 		this.y = vector.y;

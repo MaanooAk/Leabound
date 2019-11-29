@@ -10,6 +10,9 @@ import com.maanoo.leabound.core.util.Location;
 
 public class BoardArea {
 
+	public static final int LocationsSM = 60;
+	public static final int LocationsMB = 120;
+
 	public int x;
 	public int y;
 	public int w;
@@ -76,6 +79,10 @@ public class BoardArea {
 
 	public Location get(int alignment) {
 		return new Location(getX(alignment), getY(alignment));
+	}
+
+	public int getMinSize() {
+		return w < h ? w : h;
 	}
 
 	public boolean contains(int x, int y) {
