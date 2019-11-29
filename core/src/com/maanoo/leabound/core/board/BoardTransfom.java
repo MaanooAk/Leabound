@@ -37,7 +37,11 @@ public class BoardTransfom {
 
 		@Override
 		public void location(Location location, int x, int y, int w, int h) {
-			location.x = -location.x - 1;
+
+			final int xc = x + w / 2;
+			final int dx = location.x - xc;
+
+			location.x = xc - dx - (w % 2 == 1 ? 0 : 1);
 		}
 
 		@Override
@@ -60,7 +64,11 @@ public class BoardTransfom {
 
 		@Override
 		public void location(Location location, int x, int y, int w, int h) {
-			location.y = -location.y - 1;
+
+			final int yc = y + h / 2;
+			final int dy = location.y - yc;
+
+			location.y = yc - dy - (h % 2 == 1 ? 0 : 1);
 		}
 
 		@Override

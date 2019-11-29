@@ -254,6 +254,10 @@ public class ScreenGame extends StageScreen {
 					@Override
 					public void run() {
 						player.leapEnd(world.getBoard());
+
+						if (world.getBoard().name.length() > 0) {
+							player.messages.add(world.getBoard().name);
+						}
 					}
 
 				})));
@@ -369,12 +373,13 @@ public class ScreenGame extends StageScreen {
 		if (Boards.fixed.containsKey(player.boardIndex)) {
 
 			world.setBoard(Boards.fixed.get(player.boardIndex).build(player));
+
+			world.getBoard().transform(Ra.random(
+					BoardTransfom.Identity, BoardTransfom.FlipX));
 		} else {
 			world.setBoard(new Generator().generate(player));
 		}
 
-		world.getBoard().transform(Ra.random(
-				BoardTransfom.Identity, BoardTransfom.FlipX, BoardTransfom.FlipY, BoardTransfom.FlipXY));
 
 		final Board board = world.getBoard();
 
@@ -386,9 +391,6 @@ public class ScreenGame extends StageScreen {
 		groupThings.clear();
 		group.addActor(groupThings);
 
-		if (board.name.length() > 0) {
-			player.messages.add(board.name);
-		}
 	}
 
 	@Override

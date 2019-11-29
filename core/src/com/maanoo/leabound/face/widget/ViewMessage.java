@@ -85,14 +85,21 @@ public class ViewMessage extends Group {
 
 		));
 
-		if (durationMax > 5) fore.addAction(Actions.sequence(
+		if (durationMax > 5) {
+			// flicker
+			fore.addAction(Actions.sequence(
 
-				Actions.alpha(1),
-				Actions.alpha(.0f, 0.2f, Interpolation.circleIn),
-				Actions.alpha(.5f, 0.05f, Interpolation.circleIn),
-				Actions.alpha(.0f, 0.05f, Interpolation.circleIn)
+					Actions.alpha(1),
+					Actions.alpha(.0f, 0.2f, Interpolation.circleIn),
+					Actions.alpha(.5f, 0.05f, Interpolation.circleIn),
+					Actions.alpha(.0f, 0.05f, Interpolation.circleIn)
 
-		));
+			));
+		} else {
+			// reset
+			fore.clearActions();
+			fore.getColor().a = 0f;
+		}
 
 	}
 

@@ -36,8 +36,6 @@ public class Statistics {
 			bestLeaps = Run.leaps;
 			newBest = true;
 		}
-
-		System.out.println(System.currentTimeMillis());
 	}
 
 	public static String text() {
