@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
+import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Bound;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.FakeWall;
@@ -15,7 +16,6 @@ import com.maanoo.leabound.core.thing.Wall;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.Ra;
 import com.maanoo.leabound.core.util.WeightEntry;
-
 
 public class Generator {
 
@@ -34,6 +34,7 @@ public class Generator {
 		splits.add(new WeightEntry<Integer>(200, 3));
 		splits.add(new WeightEntry<Integer>(50, 4));
 
+		subs.add(new WeightEntry<SubGenerator>(25, new SubGenerator.CenterThing(null)));
 		subs.add(new WeightEntry<SubGenerator>(50, new SubGenerator.CenterThing(ThingGenerator.Parts)));
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.CenterThing(ThingGenerator.HealGround)));
 
@@ -116,7 +117,12 @@ public class Generator {
 
 		decorate(b, area);
 
-		// free the center
+		// == transform
+
+		b.transform(Ra.random(
+				BoardTransfom.Identity, BoardTransfom.FlipX, BoardTransfom.FlipY, BoardTransfom.FlipXY));
+
+		// == free the center
 
 		if (b.hasThing(Location.Zero)) {
 			if (b.getThing(Location.Zero).isBlocking()) {

@@ -16,7 +16,6 @@ import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.Ra;
 
-
 public abstract class SubGenerator {
 
 	// === class ===
@@ -48,6 +47,8 @@ public abstract class SubGenerator {
 
 		@Override
 		public Object generate(Board board, BoardArea area, float level) {
+
+			if (generator == null) return null;
 
 			final Location location = new Location(
 					area.getX(Align.center) - 1 + Ra.next(-1, 1),
