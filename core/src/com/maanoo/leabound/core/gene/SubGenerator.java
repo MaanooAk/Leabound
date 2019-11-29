@@ -2,6 +2,7 @@ package com.maanoo.leabound.core.gene;
 
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.item.Item;
@@ -20,11 +21,19 @@ import com.maanoo.leabound.core.util.Direction;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.Ra;
 
+
 public abstract class SubGenerator {
 
 	// === class ===
 
-	private SubGenerator() {
+	public final Consept[] consepts;
+
+	public SubGenerator(Consept[] consepts) {
+		this.consepts = consepts;
+	}
+
+	protected static Consept[] a(Consept... elements) {
+		return elements;
 	}
 
 	public final boolean can(Board board, BoardArea area, int emptyAreas) {
@@ -49,12 +58,13 @@ public abstract class SubGenerator {
 
 		private final BoardTransfom[] transforms;
 
-		public SubGeneratorTransform(BoardTransfom... transforms) {
+		public SubGeneratorTransform(Consept[] consepts, BoardTransfom... transforms) {
+			super(consepts);
 			this.transforms = transforms;
 		}
 
-		public SubGeneratorTransform() {
-			this(BoardTransfom.Identity, BoardTransfom.FlipX, BoardTransfom.FlipY, BoardTransfom.FlipXY);
+		public SubGeneratorTransform(Consept[] consepts) {
+			this(consepts, BoardTransfom.Identity, BoardTransfom.FlipX, BoardTransfom.FlipY, BoardTransfom.FlipXY);
 		}
 
 		@Override
@@ -133,6 +143,7 @@ public abstract class SubGenerator {
 		private final ThingGenerator generator;
 
 		public CenterThing(ThingGenerator generator) {
+			super(a(Consept.Dummy, Consept.Small));
 			this.generator = generator;
 		}
 
@@ -163,6 +174,10 @@ public abstract class SubGenerator {
 	}
 
 	public static class LogicProblem1 extends SubGenerator {
+
+		public LogicProblem1() {
+			super(a(Consept.Logic, Consept.Medium));
+		}
 
 		@Override
 		public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
@@ -294,11 +309,38 @@ public abstract class SubGenerator {
 
 	}
 
-	public static class OnePassProblem extends SubGenerator {
+	public abstract static class OnePassProblem extends SubGenerator {
 
-		@Override
-		public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
-			return medium || big;
+		public OnePassProblem(Consept size) {
+			super(a(Consept.Pass, size));
+		}
+
+		public static class Big extends OnePassProblem {
+
+			public Big() {
+				super(Consept.Big);
+			}
+
+			@Override
+			public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium,
+					boolean big) {
+				return big;
+			}
+
+		}
+
+		public static class Medium extends OnePassProblem {
+
+			public Medium() {
+				super(Consept.Medium);
+			}
+
+			@Override
+			public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium,
+					boolean big) {
+				return medium;
+			}
+
 		}
 
 		@Override

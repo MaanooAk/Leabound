@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.Align;
+
 import com.maanoo.leabound.LeaboundGame;
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.Statistics;
@@ -21,6 +22,7 @@ import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Boards;
 import com.maanoo.leabound.core.board.Bound;
+import com.maanoo.leabound.core.gene.ConseptSequence;
 import com.maanoo.leabound.core.gene.Generator;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.Thing;
@@ -35,6 +37,7 @@ import com.maanoo.leabound.face.widget.ViewPlayer;
 import com.maanoo.leabound.face.widget.ViewShadow;
 import com.maanoo.leabound.face.widget.ViewThing;
 import com.maanoo.leabound.face.widget.ViewsThing;
+
 
 public class ScreenGame extends StageScreen {
 
@@ -61,6 +64,8 @@ public class ScreenGame extends StageScreen {
 
 	public ScreenGame(LeaboundGame game) {
 		super(game);
+
+		System.out.println(new ConseptSequence().toString());
 	}
 
 	@Override
@@ -379,7 +384,6 @@ public class ScreenGame extends StageScreen {
 		} else {
 			world.setBoard(new Generator().generate(player));
 		}
-
 
 		final Board board = world.getBoard();
 

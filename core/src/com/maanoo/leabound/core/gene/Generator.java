@@ -2,6 +2,7 @@ package com.maanoo.leabound.core.gene;
 
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
@@ -18,6 +19,7 @@ import com.maanoo.leabound.core.thing.Wall;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.core.util.Ra;
 import com.maanoo.leabound.core.util.WeightEntry;
+
 
 public class Generator {
 
@@ -41,10 +43,11 @@ public class Generator {
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.CenterThing(ThingGenerator.HealGround)));
 
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem1()));
-		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.OnePassProblem()));
+		subs.add(new WeightEntry<SubGenerator>(75, new SubGenerator.OnePassProblem.Medium()));
 		subs.add(new WeightEntry<SubGenerator>(100, new TripleAnd()));
 
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem2()));
+		subs.add(new WeightEntry<SubGenerator>(75, new SubGenerator.OnePassProblem.Big()));
 		subs.add(new WeightEntry<SubGenerator>(100, new SimpleMaze()));
 	}
 
