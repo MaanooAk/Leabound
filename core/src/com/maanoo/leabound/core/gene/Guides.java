@@ -193,7 +193,7 @@ public enum Guides {
 	}
 
 	public Board buildBoard(Player player) {
-		return board.build(player);
+		return board.build(player, 1.2f);
 	}
 
 }

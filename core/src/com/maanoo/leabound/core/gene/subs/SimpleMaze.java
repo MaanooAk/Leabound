@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 
 import com.maanoo.leabound.core.gene.BoardArea;
 import com.maanoo.leabound.core.gene.Concept;
+import com.maanoo.leabound.core.gene.RewardItemGen;
 import com.maanoo.leabound.core.gene.SubGenerator.SubGeneratorTransform;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.PickUp;
@@ -21,6 +22,10 @@ public class SimpleMaze extends SubGeneratorTransform {
 
 	@Override
 	protected void generate(Array<Thing> things, BoardArea area, float level) {
+
+		final Item[] rewards = RewardItemGen.get(.7f, 1);
+
+		// ==
 
 		final Location p = area.get(Align.center);
 
@@ -50,12 +55,12 @@ public class SimpleMaze extends SubGeneratorTransform {
 			a2.shuffle();
 
 			final int count = i == 1 ? 1 : 2;
-			for (int j = 0; j < count; j++) {
+			for (int j = 0; j < count; j++) { // TODO replace j
 
 				final Location loc = (j % 2 == 0 ? a1 : a2).pop().getLocation();
 
 				if (i == size) {
-					things.add(new PickUp(loc, Item.Parts, 0));
+					things.add(new PickUp(loc, rewards[j], 0));
 				}
 			}
 

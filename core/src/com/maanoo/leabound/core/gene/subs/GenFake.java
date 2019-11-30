@@ -23,7 +23,7 @@ public class GenFake extends SubGeneratorTransform {
 
 		final Location p = area.get(Align.center);
 
-		p.add(Ra.next(area.w / 4), 0);
+		p.add(Ra.next(1, area.w / 4), 0);
 
 		things.add(new FakeWall(p));
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 
 import com.maanoo.leabound.core.gene.BoardArea;
 import com.maanoo.leabound.core.gene.Concept;
+import com.maanoo.leabound.core.gene.RewardItemGen;
 import com.maanoo.leabound.core.gene.SubGenerator.SubGeneratorTransform;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.AndGate;
@@ -27,14 +28,20 @@ public class TripleAnd extends SubGeneratorTransform {
 	@Override
 	protected void generate(Array<Thing> things, BoardArea area, float level) {
 
-		final Location p = area.get(Align.center);
+		final Item[] rewards = RewardItemGen.get(.7f, 1);
+
+		// ==
 
 		final Direction dispencerRotation = Ra.random(Direction.Left, Direction.Left, Direction.Up, Direction.Down);
+
+		// ==
+
+		final Location p = area.get(Align.center);
 
 		final int perm = Ra.next(3);
 
 		p.add(-4, 0);
-		things.add(new Dispenser(p.cpy(), dispencerRotation, Item.Parts));
+		things.add(new Dispenser(p.cpy(), dispencerRotation, rewards[0]));
 		p.add(1, 0);
 		things.add(new Wire(p.cpy()));
 		p.add(1, 0);

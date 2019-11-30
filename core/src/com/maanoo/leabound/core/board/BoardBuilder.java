@@ -49,8 +49,8 @@ public class BoardBuilder {
 		this.things = things;
 	}
 
-	public Board build(Player player) {
-		return build(player, new Bound(w, h, player));
+	public Board build(Player player, float boundDurationMult) {
+		return build(player, new Bound(w, h, player, boundDurationMult));
 	}
 
 	public Board build(Player player, Bound bound) {

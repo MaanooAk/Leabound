@@ -60,6 +60,11 @@ public abstract class SubGenerator {
 		return false;
 	}
 
+	// TODO use this instead, is it needed?
+//	public Object generate(Board board, BoardArea area, Player player) {
+//		return generate(board, area, player.getLevel());
+//	}
+
 	public abstract Object generate(Board board, BoardArea area, float level);
 
 	public int getPadding() {
@@ -151,6 +156,9 @@ public abstract class SubGenerator {
 	}
 
 	// === impls ===
+
+	// TODO move out impls
+	// TODO use RewardItemGen
 
 	public static class CenterThing extends SubGenerator {
 
