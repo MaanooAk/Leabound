@@ -19,8 +19,8 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.Statistics;
 import com.maanoo.leabound.core.World;
 import com.maanoo.leabound.core.board.Board;
-import com.maanoo.leabound.core.board.Boards;
 import com.maanoo.leabound.core.board.Bound;
+import com.maanoo.leabound.core.board.pre.IntroBoards;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.util.Location;
@@ -109,7 +109,7 @@ public class ScreenGame extends StageScreen {
 		{
 			if (Statistics.Run.time > 0) Statistics.endRun();
 
-			world.setBoard(Boards.generateFirstBoard(player));
+			world.setBoard(IntroBoards.get(player));
 
 			vBound = new ViewBound(game.skin, gsize);
 			group.addActor(vBound);

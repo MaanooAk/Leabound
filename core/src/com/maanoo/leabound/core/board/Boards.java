@@ -2,9 +2,6 @@ package com.maanoo.leabound.core.board;
 
 import java.util.ArrayList;
 
-import com.maanoo.leabound.core.Player;
-import com.maanoo.leabound.core.Statistics;
-
 
 public class Boards {
 
@@ -88,60 +85,6 @@ public class Boards {
 				, "6", "locked-chest key parts", "7", "locked-chest key-a parts", "8", "door key-b", "9", "door key-c",
 				"0", "locked-chest master-key parts"));
 
-	}
-
-	public static Board generateFirstBoard(final Player player) {
-
-		if (Statistics.runs == 0) {
-
-			return new BoardBuilder("Menu", 14, 10, ""
-
-					+ "              \n"
-					+ "              \n"
-					+ "              \n"
-					+ "           S  \n"
-					+ "           -  \n"
-					+ "           -  \n"
-					+ "  -----P   N  \n"
-					+ "  -        -  \n"
-					+ "  1        2  \n"
-					+ "              \n"
-
-					, "1", "display Move\nV\nArrows_/_WASD"//
-					, "2", "display Leap\nV\nSpace"
-
-			).build(player, new Bound(14, 10, player));
-
-		} else {
-
-			return new BoardBuilder("Menu", 14, 10, ""
-
-					+ "              \n"
-					+ "  ----  ----  \n"
-					+ "  S  N  N  S  \n"
-					+ "     3  4     \n"
-					+ "              \n"
-					+ "  P         S \n"
-					+ "  --      P - \n"
-					+ "   5      A-- \n"
-					+ "          - 6 \n"
-					+ "          7   \n"
-
-					, "1", "display Move\nV\nArrows_/_WASD" //
-					, "2", "display Leap\nV\nSpace"
-
-					, "3",
-					"display Last_Run\n" + Statistics.Run.leaps + "_[leap]leaps[]"
-							+ (Statistics.newBest ? "\nNEW_BEST" : ""),
-					"4", "display Best_Run\n" + Statistics.bestLeaps + "_[leap]leaps[]"
-
-					, "5", "display " + Statistics.text().replace(" ", "_")
-
-					, "6", "display " + "Reset_all\ndata?", "7", "display " + "$Resetting..."
-
-			).build(player, new Bound(14, 10, player));
-
-		}
 	}
 
 }
