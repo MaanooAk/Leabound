@@ -9,6 +9,8 @@ import com.maanoo.leabound.core.board.Bound;
 import com.maanoo.leabound.core.gene.subs.GenCenterThing;
 import com.maanoo.leabound.core.gene.subs.GenFake;
 import com.maanoo.leabound.core.gene.subs.GenReward;
+import com.maanoo.leabound.core.gene.subs.GenSimpleLogic;
+import com.maanoo.leabound.core.gene.subs.GenSimpleLogicBig;
 import com.maanoo.leabound.core.gene.subs.SimpleMaze;
 import com.maanoo.leabound.core.gene.subs.TripleAnd;
 import com.maanoo.leabound.core.thing.FakeWall;
@@ -40,13 +42,13 @@ public class Generator {
 		subs.add(new WeightEntry<SubGenerator>(40, new GenCenterThing(ThingGenerator.Parts)));
 		subs.add(new WeightEntry<SubGenerator>(100, new GenCenterThing(ThingGenerator.HealGround)));
 
-		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem1()));
+		subs.add(new WeightEntry<SubGenerator>(100, new GenSimpleLogic()));
 		subs.add(new WeightEntry<SubGenerator>(75, new SubGenerator.OnePassProblem.Medium()));
 		subs.add(new WeightEntry<SubGenerator>(100, new TripleAnd()));
 
 		subs.add(new WeightEntry<SubGenerator>(100777, new GenFake()));
 
-		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem2()));
+		subs.add(new WeightEntry<SubGenerator>(100, new GenSimpleLogicBig()));
 		subs.add(new WeightEntry<SubGenerator>(75, new SubGenerator.OnePassProblem.Big()));
 		subs.add(new WeightEntry<SubGenerator>(100, new SimpleMaze()));
 	}
