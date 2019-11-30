@@ -33,6 +33,9 @@ public class Item {
 	public static final Item Parts = new Item("parts", Type.Global);
 	public static final Item MasterKey = new Item("master-key", Type.Global);
 
+	/** Alias for {@link #Parts} */
+	public static final Item Fuel = Parts; // alias
+
 	// local
 
 	public static final Item Key = new Item("key", Type.Local);

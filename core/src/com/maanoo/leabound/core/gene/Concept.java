@@ -1,6 +1,6 @@
 package com.maanoo.leabound.core.gene;
 
-public enum Consept {
+public enum Concept {
 
 	Guide("guide"),
 
@@ -27,11 +27,11 @@ public enum Consept {
 	public final String name;
 	public final boolean mod;
 
-	private Consept(String name) {
+	private Concept(String name) {
 		this(name, false);
 	}
 
-	private Consept(String name, boolean mod) {
+	private Concept(String name, boolean mod) {
 		this.name = name;
 		this.mod = mod;
 	}

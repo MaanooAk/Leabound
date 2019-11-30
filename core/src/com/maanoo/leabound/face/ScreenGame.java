@@ -19,15 +19,11 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.Statistics;
 import com.maanoo.leabound.core.World;
 import com.maanoo.leabound.core.board.Board;
-import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Boards;
 import com.maanoo.leabound.core.board.Bound;
-import com.maanoo.leabound.core.gene.ConseptSequence;
-import com.maanoo.leabound.core.gene.Generator;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.util.Location;
-import com.maanoo.leabound.core.util.Ra;
 import com.maanoo.leabound.face.widget.GroupParti;
 import com.maanoo.leabound.face.widget.ViewBag;
 import com.maanoo.leabound.face.widget.ViewBound;
@@ -64,8 +60,6 @@ public class ScreenGame extends StageScreen {
 
 	public ScreenGame(LeaboundGame game) {
 		super(game);
-
-		System.out.println(new ConseptSequence().toString());
 	}
 
 	@Override
@@ -216,7 +210,9 @@ public class ScreenGame extends StageScreen {
 	private void playerLeap() {
 		final Player player = world.getPlayer();
 
-		if (player.boardIndex == 0) Statistics.newRun();
+		if (player.getBoardIndex() == -1) {
+			Statistics.newRun();
+		}
 
 		if (player.isLeaping())
 			return;
@@ -234,7 +230,7 @@ public class ScreenGame extends StageScreen {
 
 		player.leapStart();
 
-		player.messages.add("Leap #" + (player.boardIndex + 1));
+		player.messages.add("Leap #" + (player.getBoardIndex() + 1 + 1));
 
 		group.addAction(Actions.sequence(
 
@@ -373,19 +369,20 @@ public class ScreenGame extends StageScreen {
 
 		player.location.set(0, 0);
 
-		player.boardIndex += 1;
+		final Board board = player.nextBoard();
+		world.setBoard(board);
 
-		if (Boards.fixed.containsKey(player.boardIndex) && false) {
-
-			world.setBoard(Boards.fixed.get(player.boardIndex).build(player));
-
-			world.getBoard().transform(Ra.random(
-					BoardTransfom.Identity, BoardTransfom.FlipX));
-		} else {
-			world.setBoard(new Generator().generate(player));
-		}
-
-		final Board board = world.getBoard();
+//		if (Boards.fixed.containsKey(player.boardIndex)) {
+//
+//			world.setBoard(Boards.fixed.get(player.boardIndex).build(player));
+//
+//			world.getBoard().transform(Ra.random(
+//					BoardTransfom.Identity, BoardTransfom.FlipX));
+//		} else {
+//			world.setBoard(new Generator().generate(player));
+//		}
+//
+//		final Board board = world.getBoard();
 
 		vBound.set(board.getBound());
 		group.addActor(vBound);

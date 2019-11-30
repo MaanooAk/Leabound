@@ -2,7 +2,6 @@ package com.maanoo.leabound.core.board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.Statistics;
@@ -99,6 +98,7 @@ public class Boards {
 
 		fixed.put(5, new BoardBuilder(
 				"!You can pass over the [part]??[] once", ""
+
 						+ "XXxxxxXxxxxxxxxx\n"
 						+ "x     Xxx    xxx\n"
 						+ "x  1  X         \n"
@@ -114,7 +114,31 @@ public class Boards {
 						+ "Xxx             \n"
 						+ "XXXx            \n"
 
-				, "1", "pick-up key", "2", "locked-chest key parts", "x", "wall 50"
+				, "1", "pick-up key" //
+				, "2", "locked-chest key parts" //
+				, "x", "wall 50" //
+
+		));
+
+		fixed.put(6, new BoardBuilder(
+				"!There is a [part]fake wall[], find it and bump into it", ""
+
+						+ "XXxxxx     xxxx\n"
+						+ "Xxxx         xxx\n"
+						+ "xx              \n"
+						+ "                \n"
+						+ "    X     X     \n"
+						+ "                \n"
+						+ "                \n"
+						+ "                \n"
+						+ "     X     F    \n"
+						+ "                \n"
+						+ "x               \n"
+						+ "xx              \n"
+						+ "xx          xxxx\n"
+						+ "XXxxxx      xxxx\n"
+
+				, "x", "wall 50"
 
 		));
 
@@ -200,11 +224,6 @@ public class Boards {
 				, "6", "locked-chest key parts", "7", "locked-chest key-a parts", "8", "door key-b", "9", "door key-c",
 				"0", "locked-chest master-key parts"));
 
-	}
-
-	public static Board get(Player player) {
-
-		return builders.get(new Random().nextInt(builders.size())).build(player);
 	}
 
 	public static Board generateFirstBoard(final Player player) {

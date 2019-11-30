@@ -18,11 +18,15 @@ public class Bound {
 	private float multLeft = 0;
 
 	public Bound(int w, int h, Player player) {
-		this(w, h, duration(player, w), duration(player, h));
+		this(w, h, player, 1);
+	}
+
+	public Bound(int w, int h, Player player, float mult) {
+		this(w, h, duration(player, w) * mult, duration(player, h) * mult);
 	}
 
 	private static float duration(Player player, float size) {
-		if (player.boardIndex == 0) return 0;
+		if (player.getBoardIndex() == -1) return 0;
 		return 50 / size;
 	}
 

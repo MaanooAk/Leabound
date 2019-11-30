@@ -3,12 +3,15 @@ package com.maanoo.leabound.core;
 import com.badlogic.gdx.utils.Array;
 
 import com.maanoo.leabound.core.board.Board;
+import com.maanoo.leabound.core.gene.BoardSequence;
+import com.maanoo.leabound.core.gene.ConceptSequence;
+import com.maanoo.leabound.core.gene.Generator;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.item.ItemBundle;
 import com.maanoo.leabound.core.util.Location;
 
 
-public class Player {
+public final class Player {
 
 	private final String drawable;
 	public final Location location;
@@ -18,7 +21,7 @@ public class Player {
 
 	private float level;
 
-	public int boardIndex;
+	public BoardSequence boardSequence;
 
 	private boolean leaping;
 	private Board currectBoard;
@@ -34,32 +37,22 @@ public class Player {
 		life = new Life(startMaxlife - 1, startMaxlife);
 		level = 0;
 
-		boardIndex = 0;
+		boardSequence = new BoardSequence(new ConceptSequence(), new Generator());
 
 		leaping = false;
 		messages = new Array<String>();
 
-		bag.add(Item.Parts, 5);
+		bag.add(Item.Fuel, 5);
 	}
 
-	public String getDrawable() {
-		return drawable;
-	}
+	// === change ===
 
-	public void pickup(Item item) {
-
-		if (!item.activate(currectBoard, this)) {
-
-			bag.add(item, 1);
-		}
-
-		if (item == Item.Parts) Statistics.Run.parts += 1;
-	}
+	// == leap
 
 	public void leapStart() {
 		assert canLeap();
 
-		bag.deduct(Item.Parts, 1);
+		bag.deduct(Item.Fuel, 1);
 		leaping = true;
 	}
 
@@ -76,10 +69,11 @@ public class Player {
 		currectBoard = board;
 	}
 
-	private void removeLocalItems() {
-
-		bag.removeLocal();
+	public Board nextBoard() {
+		return boardSequence.next(this);
 	}
+
+	// == progress
 
 	public void addLife(int d) {
 		life.add(d);
@@ -90,21 +84,42 @@ public class Player {
 		level += amount;
 	}
 
-	// === map ===
+	// == items
+
+	public void pickup(Item item) {
+
+		if (!item.activate(currectBoard, this)) {
+
+			bag.add(item, 1);
+		}
+
+		if (item == Item.Parts) Statistics.Run.parts += 1;
+	}
 
 	public boolean deductItem(Item item, int count) {
 		return bag.deduct(item, count);
+	}
+
+	private void removeLocalItems() {
+		bag.removeLocal();
 	}
 
 	// == access ===
 
 	public boolean isLeaping() {
 		return leaping;
-
 	}
 
 	public boolean canLeap() {
-		return bag.get(Item.Parts) > 0;
+		return bag.get(Item.Fuel) > 0;
+	}
+
+	public String getDrawable() {
+		return drawable;
+	}
+
+	public int getBoardIndex() {
+		return boardSequence.getIndex();
 	}
 
 	public float getLevel() {

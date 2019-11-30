@@ -152,7 +152,7 @@ public enum Guides {
 	)),
 
 	NotGate(new BoardBuilder(
-			"*The small []??[] inverted the signal", ""
+			"*The small [part]??[] inverts the signal", ""
 
 					+ "XXxxxxx      xxX\n"
 					+ "xxxxx         xx\n"
@@ -179,11 +179,6 @@ public enum Guides {
 	;
 
 	// === access ===
-
-	@Deprecated
-	public static Guides get(int index) {
-		return values()[index];
-	}
 
 	public static Guides get(String name) {
 		return valueOf(name);

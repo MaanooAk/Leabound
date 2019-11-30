@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import com.maanoo.leabound.core.gene.BoardArea;
-import com.maanoo.leabound.core.gene.Consept;
+import com.maanoo.leabound.core.gene.Concept;
 import com.maanoo.leabound.core.gene.SubGenerator.SubGeneratorTransform;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.PickUp;
@@ -16,7 +16,7 @@ import com.maanoo.leabound.core.util.Location;
 public class SimpleMaze extends SubGeneratorTransform {
 
 	public SimpleMaze() {
-		super(a(Consept.Maze, Consept.Big));
+		super(a(Concept.Maze, Concept.Big));
 	}
 
 	@Override

@@ -26,20 +26,20 @@ public abstract class SubGenerator {
 
 	// === class ===
 
-	public final Consept[] consepts;
+	public final Concept[] Concepts;
 
-	public SubGenerator(Consept[] consepts) {
-		this.consepts = consepts;
+	public SubGenerator(Concept[] Concepts) {
+		this.Concepts = Concepts;
 	}
 
-	protected final static Consept[] a(Consept... elements) {
+	protected final static Concept[] a(Concept... elements) {
 		return elements;
 	}
 
-	public final boolean hasConsept(Consept consept) {
+	public final boolean hasConcept(Concept Concept) {
 
-		for (final Consept i : consepts) {
-			if (i.equals(consept)) return true;
+		for (final Concept i : Concepts) {
+			if (i.equals(Concept)) return true;
 		}
 		return false;
 	}
@@ -53,9 +53,9 @@ public abstract class SubGenerator {
 
 	public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
 
-		if (small && hasConsept(Consept.Small)) return true;
-		if (medium && hasConsept(Consept.Medium)) return true;
-		if (big && hasConsept(Consept.Big)) return true;
+		if (small && hasConcept(Concept.Small)) return true;
+		if (medium && hasConcept(Concept.Medium)) return true;
+		if (big && hasConcept(Concept.Big)) return true;
 
 		return false;
 	}
@@ -72,13 +72,13 @@ public abstract class SubGenerator {
 
 		private final BoardTransfom[] transforms;
 
-		public SubGeneratorTransform(Consept[] consepts, BoardTransfom... transforms) {
-			super(consepts);
+		public SubGeneratorTransform(Concept[] Concepts, BoardTransfom... transforms) {
+			super(Concepts);
 			this.transforms = transforms;
 		}
 
-		public SubGeneratorTransform(Consept[] consepts) {
-			this(consepts, BoardTransfom.Identity, BoardTransfom.FlipX, BoardTransfom.FlipY, BoardTransfom.FlipXY);
+		public SubGeneratorTransform(Concept[] Concepts) {
+			this(Concepts, BoardTransfom.Identity, BoardTransfom.FlipX, BoardTransfom.FlipY, BoardTransfom.FlipXY);
 		}
 
 		@Override
@@ -157,7 +157,7 @@ public abstract class SubGenerator {
 		private final ThingGenerator generator;
 
 		public CenterThing(ThingGenerator generator) {
-			super(a(Consept.Dummy, Consept.Small));
+			super(a(Concept.Dummy, Concept.Small));
 			this.generator = generator;
 		}
 
@@ -190,7 +190,7 @@ public abstract class SubGenerator {
 	public static class LogicProblem1 extends SubGenerator {
 
 		public LogicProblem1() {
-			super(a(Consept.Logic, Consept.Medium));
+			super(a(Concept.Logic, Concept.Medium));
 		}
 
 		@Override
@@ -325,14 +325,14 @@ public abstract class SubGenerator {
 
 	public abstract static class OnePassProblem extends SubGenerator {
 
-		public OnePassProblem(Consept size) {
-			super(a(Consept.Pass, size));
+		public OnePassProblem(Concept size) {
+			super(a(Concept.Pass, size));
 		}
 
 		public static class Big extends OnePassProblem {
 
 			public Big() {
-				super(Consept.Big);
+				super(Concept.Big);
 			}
 
 			@Override
@@ -346,7 +346,7 @@ public abstract class SubGenerator {
 		public static class Medium extends OnePassProblem {
 
 			public Medium() {
-				super(Consept.Medium);
+				super(Concept.Medium);
 			}
 
 			@Override

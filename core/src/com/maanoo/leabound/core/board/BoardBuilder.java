@@ -8,6 +8,7 @@ import com.maanoo.leabound.core.thing.AndGate;
 import com.maanoo.leabound.core.thing.Dispenser;
 import com.maanoo.leabound.core.thing.Display;
 import com.maanoo.leabound.core.thing.Door;
+import com.maanoo.leabound.core.thing.FakeWall;
 import com.maanoo.leabound.core.thing.LatchGate;
 import com.maanoo.leabound.core.thing.LockedChest;
 import com.maanoo.leabound.core.thing.NotGate;
@@ -67,7 +68,7 @@ public class BoardBuilder {
 
 			if (c == ' ') {
 				// no op
-			} else if (c == 'X') {
+			} else if (c == 'X') { // TODO extract
 				b.addThing(new Wall(location));
 				location = location.cpy();
 			} else if (c == 'W' || c == '-') {
@@ -94,8 +95,12 @@ public class BoardBuilder {
 			} else if (c == 'L') {
 				b.addThing(new LatchGate(location, Direction.Down));
 				location = location.cpy();
+			} else if (c == 'F') {
+				b.addThing(new FakeWall(location));
+				location = location.cpy();
 			} else {
 
+				// TODO move first
 				final Thing thing = parseThing(findThingDefiniton(c, things), b, location);
 				if (thing != null) {
 
@@ -157,6 +162,11 @@ public class BoardBuilder {
 			final Direction rotation = parseRotation(parts[1]);
 
 			return new AndGate(location, rotation);
+
+		} else if (parts[0].equals("not-gate")) {
+			final Direction rotation = parseRotation(parts[1]);
+
+			return new NotGate(location, rotation);
 
 		} else if (parts[0].equals("display")) {
 			final String param = parts[1].replace("_", " ");

@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import com.maanoo.leabound.core.gene.BoardArea;
-import com.maanoo.leabound.core.gene.Consept;
+import com.maanoo.leabound.core.gene.Concept;
 import com.maanoo.leabound.core.gene.SubGenerator.SubGeneratorTransform;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.LockedChest;
@@ -17,7 +17,7 @@ public class GenReward extends SubGeneratorTransform {
 	private static final Item[] items = new Item[] { Item.Parts, Item.UpgradeLife, Item.UpgradeLife, Item.MasterKey };
 
 	public GenReward() {
-		super(a(Consept.Reward, Consept.Big));
+		super(a(Concept.Reward, Concept.Big));
 	}
 
 	@Override

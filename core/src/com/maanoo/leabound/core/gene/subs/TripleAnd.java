@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import com.maanoo.leabound.core.gene.BoardArea;
-import com.maanoo.leabound.core.gene.Consept;
+import com.maanoo.leabound.core.gene.Concept;
 import com.maanoo.leabound.core.gene.SubGenerator.SubGeneratorTransform;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.AndGate;
@@ -21,7 +21,7 @@ import com.maanoo.leabound.core.util.Ra;
 public class TripleAnd extends SubGeneratorTransform {
 
 	public TripleAnd() {
-		super(a(Consept.Logic, Consept.Medium));
+		super(a(Concept.Logic, Concept.Medium));
 	}
 
 	@Override

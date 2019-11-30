@@ -6,6 +6,7 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Bound;
+import com.maanoo.leabound.core.gene.subs.GenFake;
 import com.maanoo.leabound.core.gene.subs.GenReward;
 import com.maanoo.leabound.core.gene.subs.SimpleMaze;
 import com.maanoo.leabound.core.gene.subs.TripleAnd;
@@ -42,12 +43,32 @@ public class Generator {
 		subs.add(new WeightEntry<SubGenerator>(75, new SubGenerator.OnePassProblem.Medium()));
 		subs.add(new WeightEntry<SubGenerator>(100, new TripleAnd()));
 
+		subs.add(new WeightEntry<SubGenerator>(100777, new GenFake()));
+
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem2()));
 		subs.add(new WeightEntry<SubGenerator>(75, new SubGenerator.OnePassProblem.Big()));
 		subs.add(new WeightEntry<SubGenerator>(100, new SimpleMaze()));
 	}
 
-	public final Board generate(Player player) {
+	public final Board generate(Player player, ConceptSequence.Entry centry) {
+
+		if (centry.Concepts[0] == Concept.Guide) {
+			assert centry.Concepts.length == 1;
+
+			final Board board = Guides.get(centry.message).buildBoard(player);
+
+			board.transform(Ra.random(
+					BoardTransfom.Identity, BoardTransfom.FlipX));
+
+			return board;
+		}
+
+		// TODO implement
+
+		return generate(player);
+	}
+
+	private final Board generate(Player player) {
 
 		final BoardArea area = new BoardArea(-8, -7, 16, 14, 0);
 		final Board b = new Board("", new Bound(area.w, area.h, player));
@@ -57,7 +78,7 @@ public class Generator {
 
 		// concepts
 
-		final boolean coReward = player.boardIndex % 5 == 0;
+		final boolean coReward = player.getBoardIndex() % 5 == 4;
 
 		// split areas
 
