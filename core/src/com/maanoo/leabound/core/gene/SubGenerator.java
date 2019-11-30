@@ -160,41 +160,6 @@ public abstract class SubGenerator {
 	// TODO move out impls
 	// TODO use RewardItemGen
 
-	public static class CenterThing extends SubGenerator {
-
-		private final ThingGenerator generator;
-
-		public CenterThing(ThingGenerator generator) {
-			super(a(Concept.Dummy, Concept.Small));
-			this.generator = generator;
-		}
-
-		@Override
-		public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
-			return small;
-		}
-
-		@Override
-		public Object generate(Board board, BoardArea area, float level) {
-
-			if (generator == null) return null;
-
-			final Location location = new Location(
-					area.getX(Align.center) - 1 + Ra.next(-1, 1),
-					area.getY(Align.center) + Ra.next(-1, 1));
-
-			board.addThing(generator.generate(board, location));
-
-			return null;
-		}
-
-		@Override
-		public int getPadding() {
-			return 0;
-		}
-
-	}
-
 	public static class LogicProblem1 extends SubGenerator {
 
 		public LogicProblem1() {

@@ -6,6 +6,7 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Bound;
+import com.maanoo.leabound.core.gene.subs.GenCenterThing;
 import com.maanoo.leabound.core.gene.subs.GenFake;
 import com.maanoo.leabound.core.gene.subs.GenReward;
 import com.maanoo.leabound.core.gene.subs.SimpleMaze;
@@ -35,9 +36,9 @@ public class Generator {
 		splits.add(new WeightEntry<Integer>(200, 3));
 		splits.add(new WeightEntry<Integer>(50, 4));
 
-		subs.add(new WeightEntry<SubGenerator>(25, new SubGenerator.CenterThing(null)));
-		subs.add(new WeightEntry<SubGenerator>(50, new SubGenerator.CenterThing(ThingGenerator.Parts)));
-		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.CenterThing(ThingGenerator.HealGround)));
+		subs.add(new WeightEntry<SubGenerator>(25, new GenCenterThing(null)));
+		subs.add(new WeightEntry<SubGenerator>(40, new GenCenterThing(ThingGenerator.Parts)));
+		subs.add(new WeightEntry<SubGenerator>(100, new GenCenterThing(ThingGenerator.HealGround)));
 
 		subs.add(new WeightEntry<SubGenerator>(100, new SubGenerator.LogicProblem1()));
 		subs.add(new WeightEntry<SubGenerator>(75, new SubGenerator.OnePassProblem.Medium()));
