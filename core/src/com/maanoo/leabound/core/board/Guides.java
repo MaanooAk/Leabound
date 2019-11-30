@@ -1,8 +1,6 @@
-package com.maanoo.leabound.core.gene;
+package com.maanoo.leabound.core.board;
 
 import com.maanoo.leabound.core.Player;
-import com.maanoo.leabound.core.board.Board;
-import com.maanoo.leabound.core.board.BoardBuilder;
 
 
 /**

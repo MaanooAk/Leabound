@@ -6,6 +6,7 @@ import com.maanoo.leabound.core.Player;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
 import com.maanoo.leabound.core.board.Bound;
+import com.maanoo.leabound.core.board.Guides;
 import com.maanoo.leabound.core.gene.subs.GenCenterThing;
 import com.maanoo.leabound.core.gene.subs.GenFake;
 import com.maanoo.leabound.core.gene.subs.GenPassTwoChest;
