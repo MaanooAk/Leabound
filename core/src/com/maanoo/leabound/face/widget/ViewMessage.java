@@ -94,9 +94,16 @@ public class ViewMessage extends Group {
 					Actions.alpha(1),
 					Actions.alpha(.0f, 0.2f, Interpolation.circleIn),
 					Actions.alpha(.5f, 0.05f, Interpolation.circleIn),
-					Actions.alpha(.0f, 0.05f, Interpolation.circleIn)
+					Actions.alpha(.0f, 0.05f, Interpolation.circleIn),
 
-			));
+					Actions.forever(Actions.sequence(
+
+							Actions.delay(3),
+							Actions.alpha(.4f, 0.1f, Interpolation.circleIn),
+							Actions.alpha(.0f, 0.05f, Interpolation.circleIn)
+
+					))));
+
 		} else {
 			// reset
 			fore.clearActions();
