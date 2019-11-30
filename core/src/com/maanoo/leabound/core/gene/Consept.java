@@ -7,6 +7,7 @@ public enum Consept {
 	Logic("logic"),
 	Pass("pass"),
 	Maze("maze"),
+	Fake("fake"),
 
 	Dummy("dummy"),
 	Reward("reward"),

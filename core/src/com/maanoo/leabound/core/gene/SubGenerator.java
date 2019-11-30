@@ -32,8 +32,16 @@ public abstract class SubGenerator {
 		this.consepts = consepts;
 	}
 
-	protected static Consept[] a(Consept... elements) {
+	protected final static Consept[] a(Consept... elements) {
 		return elements;
+	}
+
+	public final boolean hasConsept(Consept consept) {
+
+		for (final Consept i : consepts) {
+			if (i.equals(consept)) return true;
+		}
+		return false;
 	}
 
 	public final boolean can(Board board, BoardArea area, int emptyAreas) {
@@ -43,8 +51,14 @@ public abstract class SubGenerator {
 				area.getLocations() > BoardArea.LocationsMB);
 	}
 
-	public abstract boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium,
-			boolean big);
+	public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium, boolean big) {
+
+		if (small && hasConsept(Consept.Small)) return true;
+		if (medium && hasConsept(Consept.Medium)) return true;
+		if (big && hasConsept(Consept.Big)) return true;
+
+		return false;
+	}
 
 	public abstract Object generate(Board board, BoardArea area, float level);
 
