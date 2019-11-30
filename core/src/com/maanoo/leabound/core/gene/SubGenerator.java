@@ -5,11 +5,7 @@ import com.badlogic.gdx.utils.Array;
 
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.board.BoardTransfom;
-import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.FakeWall;
-import com.maanoo.leabound.core.thing.LockedChest;
-import com.maanoo.leabound.core.thing.OnePassDoor;
-import com.maanoo.leabound.core.thing.PickUp;
 import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.thing.Wall;
 import com.maanoo.leabound.core.thing.Wire;
@@ -154,104 +150,6 @@ public abstract class SubGenerator {
 
 	// TODO move out impls
 	// TODO use RewardItemGen
-
-	public abstract static class OnePassProblem extends SubGenerator {
-
-		public OnePassProblem(Concept size) {
-			super(a(Concept.Pass, size));
-		}
-
-		public static class Big extends OnePassProblem {
-
-			public Big() {
-				super(Concept.Big);
-			}
-
-			@Override
-			public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium,
-					boolean big) {
-				return big;
-			}
-
-		}
-
-		public static class Medium extends OnePassProblem {
-
-			public Medium() {
-				super(Concept.Medium);
-			}
-
-			@Override
-			public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium,
-					boolean big) {
-				return medium;
-			}
-
-		}
-
-		@Override
-		public Object generate(Board board, BoardArea area, float level) {
-
-			final Location p1, p2, p3;
-
-			final int dis1 = Math.max(2, 2 - (int) level + Ra.next(2));
-			final int dis2 = Math.max(2, 2 - (int) level + Ra.next(2));
-
-			if (Ra.bool()) {
-				p1 = area.get(Align.bottomLeft).add(dis2, dis1);
-				p2 = area.get(Align.topRight).add(-dis2, -dis1);
-			} else {
-				p1 = area.get(Align.bottomLeft).add(dis2, dis1);
-				p2 = area.get(Align.topRight).add(-dis1, -dis2);
-			}
-
-			if (Ra.bool()) {
-				p3 = p1.cpy(1, 2);
-			} else {
-				p3 = p1.cpy(2, 1);
-			}
-
-			final Item[] keys = new Item[] { Item.Key, Item.KeyA, Item.KeyB, Item.KeyC };
-			Ra.shuffle(keys);
-
-			final Item key1 = keys[0];
-			final Item key2 = keys[1];
-
-			final PickUp pickup1 = new PickUp(p1, key1, 0);
-			final Item pickup2 = key2;
-			final Item pickup3 = Item.Parts;
-
-			board.addThing(pickup1);
-			board.addThing(new LockedChest(p2, pickup1.getItem(), pickup2));
-			board.addThing(new LockedChest(p3, pickup2, pickup3));
-
-			//
-
-			final float fill = Math.min(.9f, .5f + level * .1f);
-
-			final Location i = new Location();
-			for (int x = 0; x < area.w; x++) {
-				for (int y = 0; y < area.h; y++) {
-					i.set(area.x + x, area.y + y);
-
-					final boolean border = x == 0 || y == 0 || x == area.w - 1 || y == area.h - 1;
-
-					if (!board.hasThing(i) && Ra.chance(border ? .5f : fill)) {
-
-						if (Ra.chance(.05f) || border) {
-							board.addThing(new Wall(i.cpy()));
-						} else {
-							board.addThing(new OnePassDoor(i.cpy()));
-						}
-
-					}
-				}
-			}
-
-			return null;
-		}
-
-	}
 
 	// === utils ===
 

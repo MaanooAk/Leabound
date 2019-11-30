@@ -22,7 +22,7 @@ public class RewardItemGen {
 
 	private static Item get(float difficulty, int index, int count) {
 
-		if (difficulty > .5f && index == 0 && Ra.chance(difficulty)) {
+		if (difficulty > .5f && index == 0 && Ra.chance(difficulty - .5f)) {
 			return Item.MasterKey;
 		}
 

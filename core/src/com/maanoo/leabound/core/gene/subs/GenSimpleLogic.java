@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Align;
 import com.maanoo.leabound.core.board.Board;
 import com.maanoo.leabound.core.gene.BoardArea;
 import com.maanoo.leabound.core.gene.Concept;
+import com.maanoo.leabound.core.gene.RewardItemGen;
 import com.maanoo.leabound.core.gene.SubGenerator;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.AndGate;
@@ -83,7 +84,7 @@ public class GenSimpleLogic extends SubGenerator {
 
 		final Location p4 = p3.cpy().mulAdd(rot.vector, 2);
 
-		final Item pickup = Item.Parts;
+		final Item pickup = RewardItemGen.get(.1f, 1)[0];
 
 		if (Ra.bool()) {
 			board.addThing(new Switch(p1));
