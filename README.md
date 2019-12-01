@@ -1,2 +1,14 @@
 # Leabound
-Leabound game (Game Off 2019)
+
+Leabound game, submission for [Game Off 2019](https://itch.io/jam/game-off-2019).
+
+![Peek 2019-12-01 15-58 resize](https://user-images.githubusercontent.com/6997990/69915293-14fba300-1456-11ea-82c0-3ac5cba215b9.gif)
+
+## Game
+
+"Leap away form the closing in bound to the next one".
+
+This a game where you crush the keyboard to mouse as fast sa possible in order to collect as much "parts" as you can and leap before the bound closing in to you kills.
+
+More at [maanooak.itch.io/leabound](https://maanooak.itch.io/leabound).
+
