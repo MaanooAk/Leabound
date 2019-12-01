@@ -20,11 +20,11 @@ public class GenPassTwoChest extends SubGenerator {
 
 	// TODO convert to SubGeneratorTransform
 
-	private final float defficulty;
+	private final float difficulty;
 
-	protected GenPassTwoChest(Concept size, float defficulty) {
+	protected GenPassTwoChest(Concept size, float difficulty) {
 		super(a(Concept.Pass, size));
-		this.defficulty = defficulty;
+		this.difficulty = difficulty;
 	}
 
 	public static class Big extends GenPassTwoChest {
@@ -33,24 +33,12 @@ public class GenPassTwoChest extends SubGenerator {
 			super(Concept.Big, .6f);
 		}
 
-		@Override
-		public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium,
-				boolean big) {
-			return big;
-		}
-
 	}
 
 	public static class Medium extends GenPassTwoChest {
 
 		public Medium() {
 			super(Concept.Medium, .4f);
-		}
-
-		@Override
-		public boolean can(Board board, BoardArea area, int emptyAreas, boolean small, boolean medium,
-				boolean big) {
-			return medium;
 		}
 
 	}
@@ -85,7 +73,7 @@ public class GenPassTwoChest extends SubGenerator {
 
 		final PickUp pickup1 = new PickUp(p1, key1, 0);
 		final Item pickup2 = key2;
-		final Item pickup3 = RewardItemGen.get(defficulty, 1)[0];
+		final Item pickup3 = RewardItemGen.get(difficulty, 1)[0];
 
 		board.addThing(pickup1);
 		board.addThing(new LockedChest(p2, pickup1.getItem(), pickup2));
