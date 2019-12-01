@@ -23,7 +23,7 @@ public class SimpleMaze extends SubGeneratorTransform {
 	@Override
 	protected void generate(Array<Thing> things, BoardArea area, float level) {
 
-		final Item[] rewards = RewardItemGen.get(.7f, 1);
+		final Item[] rewards = RewardItemGen.get(.7f, 2);
 
 		// ==
 

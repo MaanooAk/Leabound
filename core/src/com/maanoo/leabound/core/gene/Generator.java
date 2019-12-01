@@ -48,7 +48,7 @@ public class Generator {
 		subs.add(new WeightEntry<SubGenerator>(75, new GenPassTwoChest.Medium()));
 		subs.add(new WeightEntry<SubGenerator>(100, new TripleAnd()));
 
-		subs.add(new WeightEntry<SubGenerator>(100777, new GenFake()));
+		subs.add(new WeightEntry<SubGenerator>(100, new GenFake()));
 
 		subs.add(new WeightEntry<SubGenerator>(100, new GenSimpleLogicBig()));
 		subs.add(new WeightEntry<SubGenerator>(75, new GenPassTwoChest.Big()));
@@ -56,6 +56,10 @@ public class Generator {
 	}
 
 	public final Board generate(Player player, ConceptSequence.Entry centry) {
+
+		if (centry.Concepts.length == 0) {
+			return generate(player);
+		}
 
 		if (centry.Concepts[0] == Concept.Guide) {
 			assert centry.Concepts.length == 1;
@@ -69,7 +73,6 @@ public class Generator {
 		}
 
 		// TODO implement
-
 		return generate(player);
 	}
 

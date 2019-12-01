@@ -421,7 +421,7 @@ public class ScreenGame extends StageScreen {
 			}
 			// TODO red border
 
-			player.life.damage(delta);
+			player.life.damage(delta * 2);
 
 			if (player.life.isDead() && !getStage().getRoot().hasActions()) {
 
