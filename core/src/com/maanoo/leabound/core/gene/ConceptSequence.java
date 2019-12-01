@@ -11,14 +11,35 @@ import com.maanoo.leabound.core.board.pre.Guides;
 
 public class ConceptSequence {
 
-	public static final class Entry { // TODO rename
+	public static final class Entry {
 
-		public final Concept[] Concepts;
+		/**
+		 * An ordered collection of concepts. Duplicates values are allowed.
+		 */
+		public final Concept[] concepts;
+
+		/**
+		 * A message to show with the board. In case where one of the concepts is
+		 * {@link Concept#Guide}, the message if used as the name of guide and the
+		 * message given by the guide board will be used.
+		 */
 		public final String message;
 
-		public Entry(Concept[] Concepts, String message) {
-			this.Concepts = Concepts;
+		/**
+		 * @param concepts see {@link #concepts}
+		 * @param message  see {@link #message}
+		 */
+		public Entry(Concept[] concepts, String message) {
+			this.concepts = concepts;
 			this.message = message;
+		}
+
+		public final boolean hasConcept(Concept check) {
+
+			for (final Concept i : concepts) {
+				if (i.equals(check)) return true;
+			}
+			return false;
 		}
 
 	}
@@ -65,13 +86,13 @@ public class ConceptSequence {
 		}
 	}
 
-	protected final void add(int count, Concept... Concepts) {
-		add(count, null, Concepts);
+	protected final void add(int count, Concept... concepts) {
+		add(count, null, concepts);
 	}
 
-	protected final void add(int count, String message, Concept... Concepts) {
+	protected final void add(int count, String message, Concept... concepts) {
 		for (int i = 0; i < count; i++) {
-			list.add(new Entry(Concepts, message));
+			list.add(new Entry(concepts, message));
 		}
 	}
 
@@ -90,7 +111,7 @@ public class ConceptSequence {
 
 		for (int i = 0; i < list.size; i++) {
 			final Entry entry = list.get(i);
-			sb.append(i + 1).append(" ").append(Arrays.toString(entry.Concepts));
+			sb.append(i + 1).append(" ").append(Arrays.toString(entry.concepts));
 			if (entry.message != null) sb.append(" '").append(entry.message).append("'");
 			sb.append("\n");
 		}

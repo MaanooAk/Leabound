@@ -1,5 +1,7 @@
 package com.maanoo.leabound.core.gene;
 
+import java.util.Arrays;
+
 import com.badlogic.gdx.utils.Array;
 
 import com.maanoo.leabound.core.Player;
@@ -37,7 +39,7 @@ public class Generator {
 
 		splits.add(new WeightEntry<Integer>(100, 1));
 		splits.add(new WeightEntry<Integer>(50, 2));
-		splits.add(new WeightEntry<Integer>(200, 3));
+		splits.add(new WeightEntry<Integer>(130, 3));
 		splits.add(new WeightEntry<Integer>(50, 4));
 
 		subs.add(new WeightEntry<SubGenerator>(25, new GenCenterThing(null)));
@@ -53,30 +55,65 @@ public class Generator {
 		subs.add(new WeightEntry<SubGenerator>(100, new GenSimpleLogicBig()));
 		subs.add(new WeightEntry<SubGenerator>(75, new GenPassTwoChest.Big()));
 		subs.add(new WeightEntry<SubGenerator>(100, new SimpleMaze()));
+
+		subs.add(new WeightEntry<SubGenerator>(0, new GenReward()));
 	}
 
 	public final Board generate(Player player, ConceptSequence.Entry centry) {
 
-		if (centry.Concepts.length == 0) {
+		if (centry.concepts.length == 0) {
 			return generate(player);
 		}
 
-		if (centry.Concepts[0] == Concept.Guide) {
-			assert centry.Concepts.length == 1;
+		// == guides
 
-			final Board board = Guides.get(centry.message).buildBoard(player);
-
-			board.transform(Ra.random(
-					BoardTransfom.Identity, BoardTransfom.FlipX));
-
-			return board;
+		if (centry.hasConcept(Concept.Guide)) {
+			return generateGuide(player, centry);
 		}
 
-		// TODO implement
-		return generate(player);
+		// == concepts based
+
+		final Array<WeightEntry<SubGenerator>> valid = new Array<WeightEntry<SubGenerator>>();
+
+		collectValid(valid, centry.concepts);
+
+		assert valid.size > 0 : Arrays.toString(centry.concepts);
+		if (valid.size == 0) {
+			return generate(player);
+		}
+
+		final int splits;
+		if (centry.hasConcept(Concept.Big)) {
+			splits = 1;
+		} else if (centry.hasConcept(Concept.Medium)) {
+			if (centry.hasConcept(Concept.Single)) {
+
+				splits = 3;
+				collectValid(valid, Concept.Dummy, Concept.Small);
+
+			} else {
+				splits = 2;
+			}
+		} else {
+			splits = 4;
+		}
+
+		return generate(player, valid, splits);
 	}
 
-	private final Board generate(Player player) {
+	private void collectValid(final Array<WeightEntry<SubGenerator>> valid, Concept... concepts) {
+
+		for (final WeightEntry<SubGenerator> i : subs) {
+			if (i.get().hasConcepts(concepts)) valid.add(i);
+		}
+	}
+
+	private final Board generate(final Player player) {
+
+		return generate(player, subs, Ra.random(splits).get());
+	}
+
+	private final Board generate(final Player player, Array<WeightEntry<SubGenerator>> subs, int count) {
 
 		final BoardArea area = new BoardArea(-8, -7, 16, 14, 0);
 		final Board b = new Board("", new Bound(area.w, area.h, player));
@@ -84,20 +121,7 @@ public class Generator {
 		final Array<BoardArea> areas = new Array<BoardArea>();
 		areas.add(area);
 
-		// concepts
-
-		final boolean coReward = player.getBoardIndex() % 5 == 4;
-
 		// split areas
-
-		final int count;
-		if (coReward) {
-			count = 1;
-		} else {
-			count = Ra.random(splits).get();
-		}
-//		System.out.println("Splits: " + count);
-
 		splitBoardArea(areas, count);
 
 		// generate areas
@@ -110,18 +134,9 @@ public class Generator {
 		for (final BoardArea i : areas) {
 			emptyAreas -= 1;
 
-			if (coReward) {
-
-				asubs.clear();
-				asubs.add(new WeightEntry<SubGenerator>(10, new GenReward()));
-
-			} else {
-
-				asubs.clear();
-				for (final WeightEntry<SubGenerator> sub : subs) {
-					if (sub.get().can(b, i, emptyAreas)) asubs.add(sub);
-				}
-
+			asubs.clear();
+			for (final WeightEntry<SubGenerator> sub : subs) {
+				if (sub.get().can(b, i, emptyAreas)) asubs.add(sub);
 			}
 
 			final SubGenerator sub = Ra.randomWeighted(asubs).get();
@@ -227,4 +242,16 @@ public class Generator {
 		}
 	}
 
+	private Board generateGuide(Player player, ConceptSequence.Entry centry) {
+		assert centry.concepts.length == 1;
+
+		final Board board = Guides.get(centry.message).buildBoard(player);
+
+		// only flip on x to keep its look
+		board.transform(Ra.random(
+				BoardTransfom.Identity,
+				BoardTransfom.FlipX));
+
+		return board;
+	}
 }

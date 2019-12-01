@@ -14,11 +14,13 @@ public enum Concept {
 
 	//
 
-	Single(":single", true),
+	Small("small"),
+	Medium("medium"),
+	Big("big"),
 
-	Small(":small", true),
-	Medium(":medium", true),
-	Big(":big", true),
+	//
+
+	Single(":single", true),
 
 	;
 

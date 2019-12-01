@@ -17,22 +17,31 @@ public abstract class SubGenerator {
 
 	// === class ===
 
-	public final Concept[] Concepts;
+	private final Concept[] concepts;
 
-	public SubGenerator(Concept[] Concepts) {
-		this.Concepts = Concepts;
+	public SubGenerator(Concept[] concepts) {
+		this.concepts = concepts;
 	}
 
 	protected final static Concept[] a(Concept... elements) {
 		return elements;
 	}
 
-	public final boolean hasConcept(Concept Concept) {
+	public final boolean hasConcept(Concept check) {
+		if (check.mod) return true;
 
-		for (final Concept i : Concepts) {
-			if (i.equals(Concept)) return true;
+		for (final Concept i : concepts) {
+			if (i.equals(check)) return true;
 		}
 		return false;
+	}
+
+	public final boolean hasConcepts(Concept... check) {
+
+		for (final Concept i : check) {
+			if (!hasConcept(i)) return false;
+		}
+		return true;
 	}
 
 	public final boolean can(Board board, BoardArea area, int emptyAreas) {
