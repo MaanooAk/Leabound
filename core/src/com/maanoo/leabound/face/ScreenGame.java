@@ -26,6 +26,7 @@ import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.util.Location;
 import com.maanoo.leabound.face.util.Screenshot;
 import com.maanoo.leabound.face.widget.GroupParti;
+import com.maanoo.leabound.face.widget.GroupTrail;
 import com.maanoo.leabound.face.widget.ViewBag;
 import com.maanoo.leabound.face.widget.ViewBound;
 import com.maanoo.leabound.face.widget.ViewLife;
@@ -58,6 +59,12 @@ public class ScreenGame extends StageScreen {
 	private ViewMessage vMessage;
 
 	private Label version;
+
+	private HashMap<Thing, ViewThing> thingImages = new HashMap<Thing, ViewThing>();
+
+	private Label logo;
+	private GroupParti vParti;
+	private GroupTrail vTrail;
 
 	public ScreenGame(LeaboundGame game) {
 		super(game);
@@ -100,59 +107,60 @@ public class ScreenGame extends StageScreen {
 		}
 
 		vParti = new GroupParti(game.skin, width, height, gsize);
-		getStage().addActor(vParti);
 
 		damage = new Image(game.skin, "solid-red");
 		damage.getColor().a = 0;
 		damage.setSize(width, height);
-		getStage().addActor(damage);
 
-		{
-			if (Statistics.Run.time > 0) Statistics.endRun();
+		if (Statistics.Run.time > 0) Statistics.endRun();
 
-			world.setBoard(IntroBoards.get(player));
+		world.setBoard(IntroBoards.get(player));
 
-			vBound = new ViewBound(game.skin, gsize);
-			group.addActor(vBound);
+		vBound = new ViewBound(game.skin, gsize);
 
-			groupThings = new Group();
-			groupThings.setPosition(width / 2, height / 2, Align.center);
-			group.addActor(groupThings);
+		groupThings = new Group();
+		groupThings.setPosition(width / 2, height / 2, Align.center);
 
-			vBound.set(world.getBoard().getBound());
-
-			getStage().addActor(group);
-
-		}
+		vBound.set(world.getBoard().getBound());
 
 		logo = new Label("Leabound", game.skin);
 		logo.setAlignment(Align.center);
 		logo.setOrigin(Align.center);
 		logo.setFontScale(4);
 		logo.setPosition(width / 2, height - 80, Align.top);
+
+		group.addActor(vBound);
+		group.addActor(groupThings);
 		group.addActor(logo);
 
 		version = new Label("Leabound - v 0.1", game.skin);
 		version.setPosition(5, 5, Align.bottomLeft);
-		getStage().addActor(version);
 
 		vShadow = new ViewShadow(game.skin, gsize);
-		getStage().addActor(vShadow);
 
-		vPlayer = new ViewPlayer(game.skin, gsize, world.getPlayer());
+		vTrail = new GroupTrail(game.skin, gsize);
+
+		vPlayer = new ViewPlayer(game.skin, gsize, world.getPlayer(), vTrail);
 		vPlayer.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - 2 * gsize);
-		getStage().addActor(vPlayer);
 
 		vBag = new ViewBag(game.skin, player);
 		vBag.setPosition(0, height, Align.topLeft);
-		getStage().addActor(vBag);
 
 		vLife = new ViewLife(game.skin, player);
 		vLife.setPosition(width, height, Align.topLeft);
-		getStage().addActor(vLife);
 
 		vMessage = new ViewMessage(game.skin, player);
 		vMessage.setFixedPosition(width, 0, Align.bottomRight);
+
+		getStage().addActor(vParti);
+		getStage().addActor(damage);
+		getStage().addActor(vTrail);
+		getStage().addActor(group);
+		getStage().addActor(version);
+		getStage().addActor(vShadow);
+		getStage().addActor(vPlayer);
+		getStage().addActor(vBag);
+		getStage().addActor(vLife);
 		getStage().addActor(vMessage);
 
 		player.messages.add("*[leap]Leap[] to start[]");
@@ -279,6 +287,15 @@ public class ScreenGame extends StageScreen {
 
 		));
 
+		vTrail.addAction(Actions.sequence(
+
+				Actions.moveBy(-distance * dx, -distance * dy, duration, Interpolation.sineOut),
+				Actions.moveBy(2 * distance * dx, 2 * distance * dy),
+
+				Actions.moveBy(-distance * dx, -distance * dy, duration, Interpolation.circleOut)
+
+		));
+
 		Statistics.Run.leaps += 1;
 	}
 
@@ -364,10 +381,6 @@ public class ScreenGame extends StageScreen {
 		vShadow.show(player.location.x, player.location.y);
 
 	}
-
-	private HashMap<Thing, ViewThing> thingImages = new HashMap<Thing, ViewThing>();
-	private Label logo;
-	private GroupParti vParti;
 
 	private void newGroup() {
 		group.clearChildren();

@@ -16,9 +16,11 @@ public class ViewPlayer extends ViewInWorld {
 	private final AnimationDrawable anim;
 
 	private Image image;
+	private GroupTrail trail;
 
-	public ViewPlayer(Skin skin, int gsize, Player player) {
+	public ViewPlayer(Skin skin, int gsize, Player player, GroupTrail trail) {
 		super(gsize);
+		this.trail = trail;
 
 		final String drawable = player.getDrawable();
 
@@ -46,6 +48,8 @@ public class ViewPlayer extends ViewInWorld {
 		));
 
 		addAction(Actions.moveTo(cx, cy, duration * 2, Interpolation.sine));
+
+		trail.leap(this, duration);
 	}
 
 	public void bounceBound(int dx, int dy) {
@@ -79,6 +83,8 @@ public class ViewPlayer extends ViewInWorld {
 
 		addAction(Actions.moveBy(dx * gsize, dy * gsize, 0.5f, Interpolation.circleOut));
 		anim.moveToStart();
+
+		trail.move(this, dx, dy);
 	}
 
 	@Override
