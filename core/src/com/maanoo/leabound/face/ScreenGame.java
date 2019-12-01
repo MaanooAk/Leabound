@@ -334,7 +334,7 @@ public class ScreenGame extends StageScreen {
 
 			} else
 				// outside bound
-				if (!board.getBound().contains(newlocation)) {
+				if (!board.getBound().contains(newlocation) && board.getBound().isStatic()) {
 
 					vPlayer.bounceBound(dx, dy);
 					return;

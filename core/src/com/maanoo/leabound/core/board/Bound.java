@@ -47,6 +47,8 @@ public class Bound {
 
 	public void update(float delta) {
 
+		if (size.x <= 0 || size.y <= 0) return;
+
 		if (mult != 1) {
 			multLeft -= delta;
 			if (multLeft <= 0) mult = 1;
@@ -84,6 +86,10 @@ public class Bound {
 
 	public int getHeight() {
 		return size.y;
+	}
+
+	public boolean isStatic() {
+		return stepDuration.x == 0 && stepDuration.y == 0;
 	}
 
 	public float getProgressX() {
