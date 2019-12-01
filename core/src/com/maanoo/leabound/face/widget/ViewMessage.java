@@ -23,7 +23,7 @@ public class ViewMessage extends Group {
 	public ViewMessage(Skin skin, Player player) {
 		this.player = player;
 
-		setHeight(24);
+		setHeight(24 + 6);
 
 		back = new Image(skin, "solid-black");
 		back.getColor().a = 0.7f;
@@ -65,11 +65,11 @@ public class ViewMessage extends Group {
 		label.setText(text);
 		label.layout();
 
-		setWidth(label.getPrefWidth() + 30);
+		setWidth(label.getPrefWidth() + 40);
 		back.setSize(getWidth(), getHeight());
 		fore.setSize(getWidth(), getHeight());
 
-		label.setPosition(15, getHeight() / 2);
+		label.setPosition(20 + 3, getHeight() / 2);
 
 		setPosition(posX, posY - 14, posAlignment);
 
@@ -93,13 +93,13 @@ public class ViewMessage extends Group {
 
 					Actions.alpha(1),
 					Actions.alpha(.0f, 0.2f, Interpolation.circleIn),
-					Actions.alpha(.5f, 0.05f, Interpolation.circleIn),
-					Actions.alpha(.0f, 0.05f, Interpolation.circleIn),
+					Actions.alpha(.8f, 0.08f, Interpolation.circleIn),
+					Actions.alpha(.0f, 0.08f, Interpolation.circleIn),
 
 					Actions.forever(Actions.sequence(
 
 							Actions.delay(3),
-							Actions.alpha(.4f, 0.1f, Interpolation.circleIn),
+							Actions.alpha(.5f, 0.1f, Interpolation.circleIn),
 							Actions.alpha(.0f, 0.05f, Interpolation.circleIn)
 
 					))));
