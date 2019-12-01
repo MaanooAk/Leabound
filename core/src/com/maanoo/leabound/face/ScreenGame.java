@@ -115,6 +115,7 @@ public class ScreenGame extends StageScreen {
 		if (Statistics.Run.time > 0) Statistics.endRun();
 
 		world.setBoard(IntroBoards.get(player));
+		player.leapEnd(world.getBoard());
 
 		vBound = new ViewBound(game.skin, gsize);
 

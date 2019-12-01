@@ -57,13 +57,11 @@ public final class Player {
 	}
 
 	public void leapPeak() {
-		assert leaping;
 
 		removeLocalItems();
 	}
 
 	public void leapEnd(Board board) {
-		assert leaping;
 
 		leaping = false;
 		currectBoard = board;

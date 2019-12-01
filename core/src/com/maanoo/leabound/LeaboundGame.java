@@ -17,14 +17,13 @@ import com.maanoo.leabound.face.ScreenGame;
 public class LeaboundGame extends Game {
 
 	// TODO fix the vector to location transition (many are named vector)
-	// TODO tutorial for not
 
 	public static LeaboundGame I; // TODO remove
 
 	public LeaboundSkin skin;
 
 	public boolean debug = true;
-	public float speed = .1f;
+	public float speed = 1;
 
 	@Override
 	public void create() {

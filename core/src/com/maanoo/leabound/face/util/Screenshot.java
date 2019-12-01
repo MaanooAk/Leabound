@@ -1,9 +1,8 @@
 package com.maanoo.leabound.face.util;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.utils.BufferUtils;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -18,6 +17,8 @@ public final class Screenshot {
 	private Screenshot() {
 	}
 
+	public static Provider provider;
+
 	public static void take() {
 
 		take("Leabound." + System.currentTimeMillis() + ".png");
@@ -25,8 +26,10 @@ public final class Screenshot {
 
 	private static void take(final String localPath) {
 
-		// not supported on html
-		if (Gdx.app.getType() == ApplicationType.WebGL) return;
+		if (provider == null) {
+			// not supported
+			return;
+		}
 
 		final int w = Gdx.graphics.getBackBufferWidth();
 		final int h = Gdx.graphics.getBackBufferHeight();
@@ -38,9 +41,14 @@ public final class Screenshot {
 		final Pixmap pixmap = new Pixmap(w, h, Pixmap.Format.RGBA8888);
 		BufferUtils.copy(pixels, 0, pixmap.getPixels(), pixels.length);
 
-		PixmapIO.writePNG(Gdx.files.local(localPath), pixmap);
+		provider.writePixmap(Gdx.files.local(localPath), pixmap);
 
 		pixmap.dispose();
+	}
+
+	public static interface Provider {
+
+		public boolean writePixmap(FileHandle file, Pixmap pixmap);
 	}
 
 }

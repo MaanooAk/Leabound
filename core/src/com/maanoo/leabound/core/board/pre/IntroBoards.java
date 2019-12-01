@@ -19,6 +19,28 @@ public final class IntroBoards {
 
 	public static Board get(final Player player) {
 
+//		if (Ra.chance(1)) {
+//
+//			// cover image
+//			return new BoardBuilder("Menu", 14, 10, ""
+//
+//					+ "              \n"
+//					+ "  -1    O  3O \n"
+//					+ "  -       O  O\n"
+//					+ "  2----P   ---\n"
+//					+ "  -       X-XX\n"
+//					+ "  -     S---XX\n"
+//					+ "  S       XXXX\n"
+//
+//					, "1", "dispenser r key"
+//					, "2", "and-gate u"
+//					, "3", "locked-chest key parts"
+//					, "4", "pick-up key"
+//
+//			).build(player, new Bound(14, 10, player));
+//
+//		}
+
 		if (Statistics.runs == 0) {
 
 			return new BoardBuilder("Menu", 14, 10, ""

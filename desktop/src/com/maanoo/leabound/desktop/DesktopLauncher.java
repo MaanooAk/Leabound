@@ -2,7 +2,12 @@ package com.maanoo.leabound.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.PixmapIO;
+
 import com.maanoo.leabound.LeaboundGame;
+import com.maanoo.leabound.face.util.Screenshot;
 
 
 public class DesktopLauncher {
@@ -16,7 +21,25 @@ public class DesktopLauncher {
 		config.resizable = false;
 //		config.samples = 4;
 
+		Screenshot.provider = new ScreenshotProvider();
+
 		new LwjglApplication(new LeaboundGame(), config);
+	}
+
+	private static final class ScreenshotProvider implements Screenshot.Provider {
+
+		@Override
+		public boolean writePixmap(FileHandle file, Pixmap pixmap) {
+
+			try {
+				PixmapIO.writePNG(file, pixmap);
+				return true;
+			} catch (final Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+
 	}
 
 }
