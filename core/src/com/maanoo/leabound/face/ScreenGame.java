@@ -24,6 +24,7 @@ import com.maanoo.leabound.core.board.pre.IntroBoards;
 import com.maanoo.leabound.core.item.Item;
 import com.maanoo.leabound.core.thing.Thing;
 import com.maanoo.leabound.core.util.Location;
+import com.maanoo.leabound.face.util.Screenshot;
 import com.maanoo.leabound.face.widget.GroupParti;
 import com.maanoo.leabound.face.widget.ViewBag;
 import com.maanoo.leabound.face.widget.ViewBound;
@@ -190,8 +191,10 @@ public class ScreenGame extends StageScreen {
 			// debug things
 			if (game.debug && event.getKeyCode() == Keys.M) {
 
-				world.getPlayer().pickup(Item.Parts);
-				world.getPlayer().pickup(Item.MasterKey);
+				for (int i = 0; i < 10; i++) {
+					world.getPlayer().pickup(Item.Parts);
+					world.getPlayer().pickup(Item.MasterKey);
+				}
 
 				world.getBoard().getBound().setMult(-1, 2);
 
@@ -202,6 +205,10 @@ public class ScreenGame extends StageScreen {
 			} else if (game.debug && event.getKeyCode() == Keys.L) {
 
 				world.getPlayer().addLife(1);
+
+			} else if (game.debug && event.getKeyCode() == Keys.F12) {
+
+				Screenshot.take();
 
 			}
 
@@ -222,7 +229,7 @@ public class ScreenGame extends StageScreen {
 			return;
 		}
 
-		final float duration = 0.7f / 2;
+		final float duration = game.speed * 0.7f / 2;
 		final int distance = 600 * 2;
 
 		vPlayer.leap(duration);

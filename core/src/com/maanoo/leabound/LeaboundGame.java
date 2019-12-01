@@ -24,6 +24,7 @@ public class LeaboundGame extends Game {
 	public LeaboundSkin skin;
 
 	public boolean debug = true;
+	public float speed = .1f;
 
 	@Override
 	public void create() {
