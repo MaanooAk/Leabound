@@ -27,6 +27,10 @@ public class BoardArea {
 		this.align = align;
 	}
 
+	public BoardArea(Location location) {
+		this(location.x, location.y, 1, 1, 0);
+	}
+
 	public BoardArea(BoardArea other) {
 		this(other.x, other.y, other.w, other.h, other.align);
 	}

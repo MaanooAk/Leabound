@@ -9,6 +9,8 @@ public enum Concept {
 	Maze("maze"),
 	Fake("fake"),
 
+	AdvLogic("adv-logic"),
+
 	Dummy("dummy"),
 	Reward("reward"),
 

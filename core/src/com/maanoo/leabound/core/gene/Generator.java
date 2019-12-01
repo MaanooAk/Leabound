@@ -11,6 +11,8 @@ import com.maanoo.leabound.core.board.Bound;
 import com.maanoo.leabound.core.board.pre.Guides;
 import com.maanoo.leabound.core.gene.subs.GenCenterThing;
 import com.maanoo.leabound.core.gene.subs.GenFake;
+import com.maanoo.leabound.core.gene.subs.GenLogicZistor;
+import com.maanoo.leabound.core.gene.subs.GenLogicZistorPlus;
 import com.maanoo.leabound.core.gene.subs.GenPassTwoChest;
 import com.maanoo.leabound.core.gene.subs.GenReward;
 import com.maanoo.leabound.core.gene.subs.GenSimpleLogic;
@@ -55,6 +57,8 @@ public class Generator {
 		subs.add(new WeightEntry<SubGenerator>(100, new GenSimpleLogicBig()));
 		subs.add(new WeightEntry<SubGenerator>(75, new GenPassTwoChest.Big()));
 		subs.add(new WeightEntry<SubGenerator>(110, new SimpleMaze()));
+		subs.add(new WeightEntry<SubGenerator>(90, new GenLogicZistor()));
+		subs.add(new WeightEntry<SubGenerator>(90, new GenLogicZistorPlus()));
 
 		subs.add(new WeightEntry<SubGenerator>(0, new GenReward()));
 	}

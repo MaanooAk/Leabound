@@ -27,6 +27,10 @@ public abstract class SubGenerator {
 		return elements;
 	}
 
+	protected final static BoardTransfom[] a(BoardTransfom... elements) {
+		return elements;
+	}
+
 	public final boolean hasConcept(Concept check) {
 		if (check.mod) return true;
 
