@@ -57,7 +57,7 @@ public final class IntroBoards {
 					+ "              \n"
 
 					, "1", "display Move\nV\nArrows_/_WASD"//
-					, "2", "display Leap\nV\nSpace"
+					, "2", "display Leap\nV\nSpace_/_Enter"
 
 			).build(player, new Bound(14, 10, player));
 
