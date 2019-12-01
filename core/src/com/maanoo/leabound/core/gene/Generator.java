@@ -40,21 +40,21 @@ public class Generator {
 		splits.add(new WeightEntry<Integer>(100, 1));
 		splits.add(new WeightEntry<Integer>(50, 2));
 		splits.add(new WeightEntry<Integer>(130, 3));
-		splits.add(new WeightEntry<Integer>(50, 4));
+		splits.add(new WeightEntry<Integer>(25, 4));
 
 		subs.add(new WeightEntry<SubGenerator>(25, new GenCenterThing(null)));
 		subs.add(new WeightEntry<SubGenerator>(40, new GenCenterThing(ThingGenerator.Parts)));
 		subs.add(new WeightEntry<SubGenerator>(100, new GenCenterThing(ThingGenerator.HealGround)));
 
-		subs.add(new WeightEntry<SubGenerator>(100, new GenSimpleLogic()));
+		subs.add(new WeightEntry<SubGenerator>(110, new GenSimpleLogic()));
 		subs.add(new WeightEntry<SubGenerator>(75, new GenPassTwoChest.Medium()));
-		subs.add(new WeightEntry<SubGenerator>(100, new TripleAnd()));
+		subs.add(new WeightEntry<SubGenerator>(80, new TripleAnd()));
 
 		subs.add(new WeightEntry<SubGenerator>(100, new GenFake()));
 
 		subs.add(new WeightEntry<SubGenerator>(100, new GenSimpleLogicBig()));
 		subs.add(new WeightEntry<SubGenerator>(75, new GenPassTwoChest.Big()));
-		subs.add(new WeightEntry<SubGenerator>(100, new SimpleMaze()));
+		subs.add(new WeightEntry<SubGenerator>(110, new SimpleMaze()));
 
 		subs.add(new WeightEntry<SubGenerator>(0, new GenReward()));
 	}
@@ -110,7 +110,7 @@ public class Generator {
 
 	private final Board generate(final Player player) {
 
-		return generate(player, subs, Ra.random(splits).get());
+		return generate(player, subs, Ra.randomWeighted(splits).get());
 	}
 
 	private final Board generate(final Player player, Array<WeightEntry<SubGenerator>> subs, int count) {

@@ -47,6 +47,7 @@ public final class Ra {
 		return array[next(array.length)];
 	}
 
+
 	public static <T> T random(Array<T> array) {
 		return array.get(next(array.size));
 	}

@@ -27,7 +27,9 @@ public class Bound {
 
 	private static float duration(Player player, float size) {
 		if (player.getBoardIndex() == -1) return 0;
-		return 50 / size;
+
+		final float time = Math.max(20f, 50f - player.getBoardIndex() * .3f);
+		return time / size;
 	}
 
 	private Bound(int w, int h, float wStepDuration, float hStepDuration) {
