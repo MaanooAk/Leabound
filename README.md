@@ -8,7 +8,7 @@ Leabound game, submission for [Game Off 2019](https://itch.io/jam/game-off-2019)
 
 "Leap away form the closing in bound to the next one".
 
-This a game where you crush the keyboard to mouse as fast sa possible in order to collect as much "parts" as you can and leap before the bound closing in to you kills.
+This a game where you crush the keyboard to mouse as fast as possible in order to collect as many "parts" as you can and leap before the bound closing in to you kills you.
 
 More at [maanooak.itch.io/leabound](https://maanooak.itch.io/leabound).
 
