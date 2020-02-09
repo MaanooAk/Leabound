@@ -2,6 +2,8 @@
 
 Leabound game, submission for [Game Off 2019](https://itch.io/jam/game-off-2019).
 
+Update: Ranked **13**th (out of 234 games).
+
 ![Peek 2019-12-01 15-58 resize](https://user-images.githubusercontent.com/6997990/69915293-14fba300-1456-11ea-82c0-3ac5cba215b9.gif)
 
 ## Game
